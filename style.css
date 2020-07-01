@@ -1,3 +1,15 @@
+
+/* this affects the about page only */
+#landingPage{
+    background-image: url("assets/images/bg1.jpg");
+    /* opacity:0.8; */
+}
+
+#aboutUs {
+    top: 25%;
+    font-size: x-large;
+}
+
 main{
     margin-top: 1rem !important;
 }

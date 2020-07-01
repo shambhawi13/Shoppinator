@@ -5,3 +5,7 @@ main{
 .hide{
     display: none !important;
 }
+
+.upload{
+    margin-left: 0px !important;
+}

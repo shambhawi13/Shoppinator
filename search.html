@@ -41,38 +41,41 @@
                         <!-- virtical divider-->
                         <div class="ui placeholder segment">
                             <div class="ui two column very relaxed stackable grid">
-                              <div class="column">
-                                <div class="ui form">
-                                  <div class="field">
-                                    <p>Please click on upload button to upload an image. Maximum image size allowed is 5MB</p>
-                                    <button class="ui labeled icon primary basic button upload">
-                                        <i class="upload icon"></i>
-                                        Upload
-                                    </button>
-                                  </div>
-                                </div>
-                              </div>
-                              <!-- horizontal divider -->
-                              <div class="ui center aligned basic segment column horizontal-div">
-                                <div class="ui horizontal divider">Or</div>
-                              </div>
-                              
-                              <div class="middle aligned column image-url-section">
-                                <div class="ui form form-image-url">
-                                    <div class="field">
-                                      <p>Provide Image URL</p>
-                                      <input type="text" placeholder="Image URL">
+                                <div class="column">
+                                    <div class="ui form">
+                                        <div class="field">
+                                            <p>Please click on upload button to upload an image. Maximum image size
+                                                allowed is 5MB</p>
+
+                                            <input id="fileInput" type="file" style="display:none;" accept="image/png, image/jpeg" />
+                                            <button value="upload" class="ui labeled icon primary basic button upload"
+                                                onclick="uploadImage()" >
+                                                <i class="upload icon"></i> Upload
+                                            </button>
+                                        </div>
                                     </div>
-                                  </div>
-                              </div>
+                                </div>
+                                <!-- horizontal divider -->
+                                <div class="ui center aligned basic segment column horizontal-div">
+                                    <div class="ui horizontal divider">Or</div>
+                                </div>
+
+                                <div class="middle aligned column image-url-section">
+                                    <div class="ui form form-image-url">
+                                        <div class="field">
+                                            <p>Provide Image URL</p>
+                                            <input type="text" placeholder="Image URL">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="ui vertical divider">
-                              Or
+                                Or
                             </div>
-                          </div>
+                        </div>
                     </div>
 
-                    
+
                     <div class="title">
                         <i class="dropdown icon"></i>
                         Search by Text
@@ -95,7 +98,7 @@
                                     <option value="">Electronics</option>
                                     <option value="1">Furniture</option>
                                     <option value="2">Decoratives</option>
-                                  </select>
+                                </select>
                                 <div class="ui pointing label hide">
                                     Please enter a product Type
                                 </div>
@@ -126,12 +129,12 @@
                 <!--toggle button-->
                 <div class="ui form segment toggle-store-online">
                     <div class="field">
-                      <div class="ui toggle checkbox">
-                        <input type="checkbox" name="store" tabindex="0">
-                        <label>Would you like to purchase in-store</label>
-                      </div>
+                        <div class="ui toggle checkbox">
+                            <input type="checkbox" name="store" tabindex="0">
+                            <label>Would you like to purchase in-store</label>
+                        </div>
                     </div>
-                  </div>
+                </div>
 
                 <input type="button" class="ui primary button" value="Submit">
 

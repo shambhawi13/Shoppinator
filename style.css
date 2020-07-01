@@ -1,10 +1,13 @@
 
-body{
+/* this affects the about page only */
+#landingPage{
     background-image: url("assets/images/bg1.jpg");
+    /* opacity:0.8; */
 }
 
 #aboutUs {
-    font-size: larger;
+    top: 25%;
+    font-size: x-large;
 }
 
 main{

@@ -13,3 +13,33 @@ main{
 .nav-bar-menu{
     margin-right: 1em !important;
 }
+
+.toggle-store-online{
+    background: #f9fafb !important;
+}
+
+.padding-top{
+    padding-top: 2rem !important;
+}
+
+@media screen and (max-width: 767px) {
+    .vertical{
+        visibility: hidden !important;
+    }
+    .horizontal-div{
+        display: table !important;
+    }
+    .upload{
+        margin-left: auto !important;
+    }
+    
+}
+
+@media screen and (min-width: 768px) {
+    .vertical{
+        visibility: visible !important;
+    }
+    .horizontal-div{
+        display: none !important;
+    }
+}

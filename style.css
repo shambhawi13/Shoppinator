@@ -1,7 +1,25 @@
+
 body{
     background-image: url("assets/images/bg1.jpg");
 }
 
-#id {
-    background-color: azure;
+#aboutUs {
+    font-size: larger;
 }
+
+main{
+    margin-top: 1rem !important;
+}
+
+.hide{
+    display: none !important;
+}
+
+.upload{
+    margin-left: 0px !important;
+}
+
+.nav-bar-menu{
+    margin-right: 1em !important;
+}
+

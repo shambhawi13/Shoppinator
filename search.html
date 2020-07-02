@@ -32,7 +32,7 @@
 
                 <!-- accordian-->
                 <div class="ui styled fluid accordion">
-                    <div class="active title">
+                    <div class="active title" id="imageAccord">
                         <i class="dropdown icon"></i>
                         Search by Image
                     </div>
@@ -74,9 +74,7 @@
                             </div>
                         </div>
                     </div>
-
-
-                    <div class="title">
+                    <div class="title" id="textAccord">
                         <i class="dropdown icon"></i>
                         Search by Text
                     </div>
@@ -86,7 +84,7 @@
                             <div class="ui divider"></div>
                             <div class="field">
                                 <label>Product Name</label>
-                                <input type="text" placeholder="Product name">
+                                <input type="text" placeholder="Product name" id="product-name">
                                 <div class="ui pointing label hide">
                                     Please enter a product name
                                 </div>
@@ -94,7 +92,7 @@
                             <div class="ui divider"></div>
                             <div class="field" placeholder="Last Name">
                                 <label>Product Type</label>
-                                <select class="ui fluid search dropdown" name="type">
+                                <select class="ui fluid search dropdown" name="type" id="product-type">
                                     <option value="">Electronics</option>
                                     <option value="1">Furniture</option>
                                     <option value="2">Decoratives</option>
@@ -116,7 +114,6 @@
 
                     </div>
                 </div>
-                <!--test-->
                 <!--toggle button-->
                 <div class="ui form segment toggle-store-online">
                     <div class="field">
@@ -126,12 +123,9 @@
                         </div>
                     </div>
                 </div>
-
                 <input type="button" class="ui primary button submit-button" value="Submit">
-
             </div>
             <div class="three wide column">
-
             </div>
         </div>
     </main>

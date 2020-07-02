@@ -54,37 +54,61 @@ $('.submit-button').on('click', (event) => {
     var resultObject;
 
     if (accordSelected === 'image') {
-        var imageUrl = $('.form-image-url input').val().trim();
-        var settings = {
-            "async": true,
-            "crossDomain": true,
-            "url": "https://google-ai-vision.p.rapidapi.com/cloudVision/imageObjectDetection",
-            "method": "POST",
-            "headers": {
-                "x-rapidapi-host": "google-ai-vision.p.rapidapi.com",
-                "x-rapidapi-key": rapidAPIKey,
-                "content-type": "application/json",
-                "accept": "application/json"
-            },
-            "processData": false,
-            "data": "{ \"source\":\"" + imageUrl + "\", \"sourceType\": \"url\"}"
-        }
 
-        console.log(settings);
-        var storesResponse = JSON.parse(localStorage.getItem('scanned-image'));
-        //to be removed later
-        if (storesResponse) {
-            console.log('Stored in local storage');
-            //lodash to map names from response
-            console.log(_.map(storesResponse, 'name'));
-            resultObject = _.map(storesResponse, 'name');
-        }
-        else {
+        if (b64) {
+            var settings = {
+                "async": true,
+                "crossDomain": true,
+                "url": "https://google-ai-vision.p.rapidapi.com/cloudVision/imageObjectDetection",
+                "method": "POST",
+                "headers": {
+                    "x-rapidapi-host": "google-ai-vision.p.rapidapi.com",
+                    "x-rapidapi-key": rapidAPIKey,
+                    "content-type": "application/json",
+                    "accept": "application/json"
+                },
+                "processData": false,
+                "data": "{ \"source\":\"" + b64 + "\", \"sourceType\": \"base64\"}"
+            }
             $.ajax(settings).done(function (response) {
                 console.log(response);
                 localStorage.setItem('scanned-image', JSON.stringify(response.objects));
                 resultObject = _.map(response.objects, 'name');
             });
+        }
+        else {
+            var imageUrl = $('.form-image-url input').val().trim();
+            var settings = {
+                "async": true,
+                "crossDomain": true,
+                "url": "https://google-ai-vision.p.rapidapi.com/cloudVision/imageObjectDetection",
+                "method": "POST",
+                "headers": {
+                    "x-rapidapi-host": "google-ai-vision.p.rapidapi.com",
+                    "x-rapidapi-key": rapidAPIKey,
+                    "content-type": "application/json",
+                    "accept": "application/json"
+                },
+                "processData": false,
+                "data": "{ \"source\":\"" + imageUrl + "\", \"sourceType\": \"url\"}"
+            }
+
+            var storesResponse = JSON.parse(localStorage.getItem('scanned-image'));
+            //to be removed later
+            if (storesResponse) {
+                console.log('Stored in local storage');
+                //lodash to map names from response
+                console.log(_.map(storesResponse, 'name'));
+                resultObject = _.map(storesResponse, 'name');
+            }
+            else {
+                $.ajax(settings).done(function (response) {
+                    console.log(response);
+                    localStorage.setItem('scanned-image', JSON.stringify(response.objects));
+                    resultObject = _.map(response.objects, 'name');
+                });
+            }
+
         }
 
     }

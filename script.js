@@ -37,6 +37,8 @@ function uploadImage() {
 //converts image to base 64
 function readFile() {
     if (this.files && this.files[0]) {
+        $('#uploadedFileName').removeClass('hide');
+        $('#uploadedFileName').text(this.files[0].name);
         var FR = new FileReader();
         $(FR).on("load", function (e) {
             //console.log('b64 result: ' + e.target.result);
@@ -70,11 +72,11 @@ $('.submit-button').on('click', (event) => {
                 "processData": false,
                 "data": "{ \"source\":\"" + b64 + "\", \"sourceType\": \"base64\"}"
             }
-            $.ajax(settings).done(function (response) {
-                console.log(response);
-                localStorage.setItem('scanned-image', JSON.stringify(response.objects));
-                resultObject = _.map(response.objects, 'name');
-            });
+            // $.ajax(settings).done(function (response) {
+            //     console.log(response);
+            //     localStorage.setItem('scanned-image', JSON.stringify(response.objects));
+            //     resultObject = _.map(response.objects, 'name');
+            // });
         }
         else {
             var imageUrl = $('.form-image-url input').val().trim();
@@ -137,3 +139,39 @@ $('.submit-button').on('click', (event) => {
 // }
 
 /* Search Page Logic ends here */
+
+/* Result Page */
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.watchPosition(showPosition);
+    } else {
+        console.log("Geolocation is not supported by this browser.");
+    }
+}
+
+function showPosition(position) {
+    console.log("Latitude: " + position.coords.latitude +
+        " Longitude: " + position.coords.longitude);
+
+    var latlon = position.coords.latitude + "," + position.coords.longitude;
+
+    var img_url = "https://maps.googleapis.com/maps/api/staticmap?center="+latlon+ " & zoom=14 & size=400x300 & sensor=false & key=" + "AIzaSyBhIY-oXFJCLXLjRZz4GvKJeOlzMTcHxcA";
+
+    document.getElementById("mapholder").innerHTML = "<img src='" + img_url + "'>";
+}
+
+//getLocation();
+
+const url = 'https://cors-anywhere.herokuapp.com/https://api.sandbox.ebay.com/identity/v1/oauth2/token';
+
+//const token = Buffer.from(`Giovanni-Shoppina-SBX-4c8e89b76-44e3c891:SBX-c8e89b76f7ec-0537-4b4e-b43f-5099`, 'utf8').toString('base64')
+
+axios.post(url, {
+  headers: {
+    'Authorization': `Basic R2lvdmFubmktU2hvcHBpbmEtU0JYLTRjOGU4OWI3Ni00NGUzYzg5MTpTQlgtYzhlODliNzZmN2VjLTA1MzctNGI0ZS1iNDNmLTUwOTk`,
+    'content-type': 'application/x-www-form-urlencoded'
+  }
+}) .then(function (response) {
+    console.log(response);
+  })

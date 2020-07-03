@@ -44,6 +44,10 @@
     padding-top: 2rem !important;
 }
 
+textarea{
+    border-color: lightblue !important;
+}
+
 @media screen and (max-width: 767px) {
     .vertical{
         visibility: hidden !important;

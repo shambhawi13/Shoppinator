@@ -125,6 +125,9 @@ $('.submit-button').on('click', (event) => {
         resultObject.push(productName);
     }
 
+    // navigate to results page
+    window.location.href = "./result.html";
+
 });
 
 

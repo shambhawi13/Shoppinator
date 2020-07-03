@@ -84,6 +84,7 @@ $('.submit-button').on('click', (event) => {
                 console.log(response);
                 localStorage.setItem('scanned-image', JSON.stringify(response.objects));
                 resultObject = _.map(response.objects, 'name');
+                resultObject = _.uniq(resultObject);
                 //remove loader
                 $('.dimmer').removeClass('active');
                 // navigate to results page
@@ -114,6 +115,7 @@ $('.submit-button').on('click', (event) => {
                 //lodash to map names from response
                 console.log(_.map(storesResponse, 'name'));
                 resultObject = _.map(storesResponse, 'name');
+                resultObject = _.uniq(resultObject);
                 //remove loader
                 $('.dimmer').removeClass('active');
                 // navigate to results page
@@ -124,6 +126,7 @@ $('.submit-button').on('click', (event) => {
                     console.log(response);
                     localStorage.setItem('scanned-image', JSON.stringify(response.objects));
                     resultObject = _.map(response.objects, 'name');
+                    resultObject = _.uniq(resultObject);
                     //remove loader
                     $('.dimmer').removeClass('active');
                     // navigate to results page
@@ -138,6 +141,7 @@ $('.submit-button').on('click', (event) => {
         resultObject = [];
         let productName = $('#product-name').val().trim();
         resultObject.push(productName);
+        resultObject = _.uniq(resultObject);
         //remove loader
         $('.dimmer').removeClass('active');
         // navigate to results page

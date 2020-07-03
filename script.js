@@ -11,10 +11,6 @@ var accordSelected = 'image';
 var b64;
 
 $('.ui.accordion')
-<<<<<<< HEAD
-  .accordion()
-;
-=======
     .accordion()
     ;
 
@@ -156,4 +152,3 @@ function showPosition(position) {
 }
 
 
->>>>>>> upstream/master

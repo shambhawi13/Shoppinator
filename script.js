@@ -5,6 +5,7 @@
 
 // Please replace the API key below:
 var rapidAPIKey = 'c6064b5170msh977e24b1ae6c804p17fd8djsnf539fedd1d13';
+var resultObject;
 //default value on page load
 var storeType = 'online';
 var accordSelected = 'image';
@@ -58,7 +59,9 @@ $("#fileInput").on("change", readFile);
 
 $('.submit-button').on('click', (event) => {
     event.preventDefault();
-    var resultObject;
+
+    // show loader
+    $('.dimmer').addClass('active');
 
     if (accordSelected === 'image') {
 
@@ -81,6 +84,10 @@ $('.submit-button').on('click', (event) => {
                 console.log(response);
                 localStorage.setItem('scanned-image', JSON.stringify(response.objects));
                 resultObject = _.map(response.objects, 'name');
+                //remove loader
+                $('.dimmer').removeClass('active');
+                // navigate to results page
+                window.location.href = "./result.html";
             });
         }
         else {
@@ -107,12 +114,20 @@ $('.submit-button').on('click', (event) => {
                 //lodash to map names from response
                 console.log(_.map(storesResponse, 'name'));
                 resultObject = _.map(storesResponse, 'name');
+                //remove loader
+                $('.dimmer').removeClass('active');
+                // navigate to results page
+                window.location.href = "./result.html";
             }
             else {
                 $.ajax(settings).done(function (response) {
                     console.log(response);
                     localStorage.setItem('scanned-image', JSON.stringify(response.objects));
                     resultObject = _.map(response.objects, 'name');
+                    //remove loader
+                    $('.dimmer').removeClass('active');
+                    // navigate to results page
+                    window.location.href = "./result.html";
                 });
             }
 
@@ -123,10 +138,11 @@ $('.submit-button').on('click', (event) => {
         resultObject = [];
         let productName = $('#product-name').val().trim();
         resultObject.push(productName);
+        //remove loader
+        $('.dimmer').removeClass('active');
+        // navigate to results page
+        window.location.href = "./result.html";
     }
-
-    // navigate to results page
-    window.location.href = "./result.html";
 
 });
 

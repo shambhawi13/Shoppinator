@@ -118,6 +118,7 @@ $('.submit-button').on('click', (event) => {
                 resultObject = _.uniq(resultObject);
                 //remove loader
                 $('.dimmer').removeClass('active');
+                getLocation();
                 // navigate to results page
                 window.location.href = "./result.html";
             }
@@ -129,6 +130,9 @@ $('.submit-button').on('click', (event) => {
                     resultObject = _.uniq(resultObject);
                     //remove loader
                     $('.dimmer').removeClass('active');
+                }).then(() => {
+                    //call function that performs all task in result page
+                    getLocation();
                     // navigate to results page
                     window.location.href = "./result.html";
                 });
@@ -169,9 +173,10 @@ function showPosition(position) {
 
     var latlon = position.coords.latitude + "," + position.coords.longitude;
 
-    var img_url = "https://maps.googleapis.com/maps/api/staticmap?center=" + latlon + " & zoom=14 & size=400x300 & sensor=false & key=" + "AIzaSyBhIY-oXFJCLXLjRZz4GvKJeOlzMTcHxcA";
+    //var img_url = "https://maps.googleapis.com/maps/api/staticmap?center=" + latlon + " & zoom=14 & size=400x300 & sensor=false & key=" + "AIzaSyBhIY-oXFJCLXLjRZz4GvKJeOlzMTcHxcA";
 
-    document.getElementById("mapholder").innerHTML = "<img src='" + img_url + "'>";
+    //document.getElementById("mapholder").innerHTML = "<img src='" + img_url + "'>";
+    console.log("coords: " + latlon);
 }
 
 

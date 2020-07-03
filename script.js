@@ -1,4 +1,9 @@
 /* Search Page Logic here */
+//Sample image URL:
+// https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRyTqyx98Kh8VjAwJ7Ud-k1XuKiibR_SuprGbsBln-tl-uhVaNkw7FIzEPWCA&usqp=CAc
+
+
+// Please replace the API key below:
 var rapidAPIKey = 'c6064b5170msh977e24b1ae6c804p17fd8djsnf539fedd1d13';
 //default value on page load
 var storeType = 'online';
@@ -72,11 +77,11 @@ $('.submit-button').on('click', (event) => {
                 "processData": false,
                 "data": "{ \"source\":\"" + b64 + "\", \"sourceType\": \"base64\"}"
             }
-            // $.ajax(settings).done(function (response) {
-            //     console.log(response);
-            //     localStorage.setItem('scanned-image', JSON.stringify(response.objects));
-            //     resultObject = _.map(response.objects, 'name');
-            // });
+            $.ajax(settings).done(function (response) {
+                console.log(response);
+                localStorage.setItem('scanned-image', JSON.stringify(response.objects));
+                resultObject = _.map(response.objects, 'name');
+            });
         }
         else {
             var imageUrl = $('.form-image-url input').val().trim();
@@ -97,7 +102,7 @@ $('.submit-button').on('click', (event) => {
 
             var storesResponse = JSON.parse(localStorage.getItem('scanned-image'));
             //to be removed later
-            if (storesResponse) {
+            if (storesResponse && storesResponse.length > 0) {
                 console.log('Stored in local storage');
                 //lodash to map names from response
                 console.log(_.map(storesResponse, 'name'));
@@ -123,21 +128,6 @@ $('.submit-button').on('click', (event) => {
 });
 
 
-// var settings = {
-//     "async": true,
-//     "crossDomain": true,
-//     "url": "https://google-ai-vision.p.rapidapi.com/cloudVision/imageObjectDetection",
-//     "method": "POST",
-//     "headers": {
-//         "x-rapidapi-host": "google-ai-vision.p.rapidapi.com",
-//         "x-rapidapi-key": rapidAPIKey,
-//         "content-type": "application/json",
-//         "accept": "application/json"
-//     },
-//     "processData": false,
-//     "data": "{ \"source\": \"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRyTqyx98Kh8VjAwJ7Ud-k1XuKiibR_SuprGbsBln-tl-uhVaNkw7FIzEPWCA&usqp=CAc\", \"sourceType\": \"url\"}"
-// }
-
 /* Search Page Logic ends here */
 
 /* Result Page */
@@ -156,22 +146,9 @@ function showPosition(position) {
 
     var latlon = position.coords.latitude + "," + position.coords.longitude;
 
-    var img_url = "https://maps.googleapis.com/maps/api/staticmap?center="+latlon+ " & zoom=14 & size=400x300 & sensor=false & key=" + "AIzaSyBhIY-oXFJCLXLjRZz4GvKJeOlzMTcHxcA";
+    var img_url = "https://maps.googleapis.com/maps/api/staticmap?center=" + latlon + " & zoom=14 & size=400x300 & sensor=false & key=" + "AIzaSyBhIY-oXFJCLXLjRZz4GvKJeOlzMTcHxcA";
 
     document.getElementById("mapholder").innerHTML = "<img src='" + img_url + "'>";
 }
 
-//getLocation();
 
-const url = 'https://cors-anywhere.herokuapp.com/https://api.sandbox.ebay.com/identity/v1/oauth2/token';
-
-//const token = Buffer.from(`Giovanni-Shoppina-SBX-4c8e89b76-44e3c891:SBX-c8e89b76f7ec-0537-4b4e-b43f-5099`, 'utf8').toString('base64')
-
-axios.post(url, {
-  headers: {
-    'Authorization': `Basic R2lvdmFubmktU2hvcHBpbmEtU0JYLTRjOGU4OWI3Ni00NGUzYzg5MTpTQlgtYzhlODliNzZmN2VjLTA1MzctNGI0ZS1iNDNmLTUwOTk`,
-    'content-type': 'application/x-www-form-urlencoded'
-  }
-}) .then(function (response) {
-    console.log(response);
-  })

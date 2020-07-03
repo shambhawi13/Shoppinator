@@ -4,15 +4,15 @@
 
 
 // Please replace the API key below:
-var rapidAPIKey = 'c6064b5170msh977e24b1ae6c804p17fd8djsnf539fedd1d13';
+var rapidAPIKey = '1bf62c9debmsh3edd1466134defbp184527jsn0116cb66a76e';
 //default value on page load
 var storeType = 'online';
 var accordSelected = 'image';
 var b64;
 
-$('.ui.accordion')
-    .accordion()
-    ;
+// $('.ui.accordion')
+//     .accordion()
+//     ;
 
 $('.toggle-store-online input[type="checkbox"]').click(function () {
     if ($(this).is(":checked")) {
@@ -151,4 +151,30 @@ function showPosition(position) {
     document.getElementById("mapholder").innerHTML = "<img src='" + img_url + "'>";
 }
 
+function amazonSearch(item) {
+    var items = item.join(",");
+    axios.get("https://amazon-product-reviews-keywords.p.rapidapi.com/product/search?country=US&keyword=" + items, {
+      "headers": {
+        "x-rapidapi-host": "amazon-product-reviews-keywords.p.rapidapi.com",
+        "x-rapidapi-key": rapidAPIKey
+      }
+    })
+    .then(response => {
+      console.log(response);
+      var products = response.data.products;
+      var thumbnail = products[0].thumbnail;
+      var productName = products[0].title;
+      var productLink = products[0].url;
 
+      document.getElementById("product1-image").src = thumbnail;
+      document.getElementById("product1-link").innerHTML = productName;
+      document.getElementById("product1-link").href = productLink;
+    })
+    .catch(error => {
+      console.log(error);
+    })
+}
+
+amazonSearch(["drone"]); //requires an array of strings
+
+var randomObjects = ["chair", "iphone", "laptop"];

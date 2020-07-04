@@ -235,11 +235,9 @@ var randomObjects = ["chair", "iphone", "laptop"];
 
 for (var i=0; i<randomObjects.length; i++) {
   $("#item-buttons").append(`
-  <div class="ui segment">
-    <div class="ui center aligned small header">
-      <button class="ui primary button item">${randomObjects[i]}</button>
+    <div class="ui segment center aligned small">
+      <button id="object-btn" class="ui fluid primary button item">${randomObjects[i]}</button>
     </div>
-  </div>
   `);
 
 }

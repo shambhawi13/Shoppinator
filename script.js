@@ -5,6 +5,7 @@
 
 // Please replace the API key below:
 var rapidAPIKey = '1bf62c9debmsh3edd1466134defbp184527jsn0116cb66a76e';
+var resultObject;
 //default value on page load
 var storeType = 'online';
 var accordSelected = 'image';
@@ -18,10 +19,14 @@ $('.toggle-store-online input[type="checkbox"]').click(function () {
     if ($(this).is(":checked")) {
         storeType = 'store';
         console.log("Checkbox is checked." + storeType);
+        // $(".display-map").attr("style","display: inline-block !important");
+        // $(".display-div").attr("style","display: none !important");
     }
     else if ($(this).is(":not(:checked)")) {
         storeType = 'online';
         console.log("Checkbox is unchecked." + storeType);
+        // $(".display-div").attr("style","display: inline-block !important");
+        // $(".display-map").attr("style","display: none !important");
     }
 });
 
@@ -58,7 +63,9 @@ $("#fileInput").on("change", readFile);
 
 $('.submit-button').on('click', (event) => {
     event.preventDefault();
-    var resultObject;
+
+    // show loader
+    $('.dimmer').addClass('active');
 
     if (accordSelected === 'image') {
 
@@ -81,6 +88,11 @@ $('.submit-button').on('click', (event) => {
                 console.log(response);
                 localStorage.setItem('scanned-image', JSON.stringify(response.objects));
                 resultObject = _.map(response.objects, 'name');
+                resultObject = _.uniq(resultObject);
+                //remove loader
+                $('.dimmer').removeClass('active');
+                // navigate to results page
+                window.location.href = "./result.html";
             });
         }
         else {
@@ -107,12 +119,26 @@ $('.submit-button').on('click', (event) => {
                 //lodash to map names from response
                 console.log(_.map(storesResponse, 'name'));
                 resultObject = _.map(storesResponse, 'name');
+                resultObject = _.uniq(resultObject);
+                //remove loader
+                $('.dimmer').removeClass('active');
+                getLocation();
+                // navigate to results page
+                window.location.href = "./result.html";
             }
             else {
                 $.ajax(settings).done(function (response) {
                     console.log(response);
                     localStorage.setItem('scanned-image', JSON.stringify(response.objects));
                     resultObject = _.map(response.objects, 'name');
+                    resultObject = _.uniq(resultObject);
+                    //remove loader
+                    $('.dimmer').removeClass('active');
+                }).then(() => {
+                    //call function that performs all task in result page
+                    getLocation();
+                    // navigate to results page
+                    window.location.href = "./result.html";
                 });
             }
 
@@ -123,6 +149,11 @@ $('.submit-button').on('click', (event) => {
         resultObject = [];
         let productName = $('#product-name').val().trim();
         resultObject.push(productName);
+        resultObject = _.uniq(resultObject);
+        //remove loader
+        $('.dimmer').removeClass('active');
+        // navigate to results page
+        window.location.href = "./result.html";
     }
 
 });
@@ -133,22 +164,71 @@ $('.submit-button').on('click', (event) => {
 /* Result Page */
 
 function getLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.watchPosition(showPosition);
-    } else {
-        console.log("Geolocation is not supported by this browser.");
-    }
+  if (navigator.geolocation) {
+    navigator.geolocation.watchPosition(showPosition);
+  } else {
+    console.log("Geolocation is not supported by this browser.");
+  }
 }
 
 function showPosition(position) {
-    console.log("Latitude: " + position.coords.latitude +
-        " Longitude: " + position.coords.longitude);
+  console.log("Latitude: " + position.coords.latitude +
+    " Longitude: " + position.coords.longitude);
 
-    var latlon = position.coords.latitude + "," + position.coords.longitude;
+  var latlon = position.coords.latitude + "," + position.coords.longitude;
 
-    var img_url = "https://maps.googleapis.com/maps/api/staticmap?center=" + latlon + " & zoom=14 & size=400x300 & sensor=false & key=" + "AIzaSyBhIY-oXFJCLXLjRZz4GvKJeOlzMTcHxcA";
+  //var img_url = "https://maps.googleapis.com/maps/api/staticmap?center=" + latlon + " & zoom=14 & size=400x300 & sensor=false & key=" + "AIzaSyBhIY-oXFJCLXLjRZz4GvKJeOlzMTcHxcA";
 
-    document.getElementById("mapholder").innerHTML = "<img src='" + img_url + "'>";
+  //document.getElementById("mapholder").innerHTML = "<img src='" + img_url + "'>";
+  console.log("coords: " + latlon);
+}
+
+
+// START MAP LOGIC HERE
+//variables to hold users position
+var lattitude;
+var longitude;
+var markers = [];// array to hold places
+
+/*get users location */
+var map, infoWindow;
+function initMap() {
+  map = new google.maps.Map(document.getElementById("map"), {
+    center: { lat: 37.75, lng: -122.44 },
+    zoom: 12
+
+  });
+
+  //instantiates new tool window
+  infoWindow = new google.maps.InfoWindow();
+
+  // Try HTML5 geolocation.
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      function (position) {
+        pos = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+        //set variables for user location
+        lattitude = position.coords.latitude;
+        //console.log(lattitude);
+        longitude = position.coords.longitude;
+        //console.log(longitude);
+        infoWindow.setPosition(pos);
+        infoWindow.setContent("Your Location.");
+        infoWindow.open(map);
+        map.setCenter(pos);
+        storePlaces(); //
+      },
+      function () {
+        handleLocationError(true, infoWindow, map.getCenter());
+      }
+    );
+  } else {
+    // Browser doesn't support Geolocation
+    handleLocationError(false, infoWindow, map.getCenter());
+  }
 }
 
 function amazonSearch(item) {
@@ -162,11 +242,39 @@ function amazonSearch(item) {
     .then(response => {
       console.log(response);
       var products = response.data.products;
-      var thumbnail1 = products[0].thumbnail;
-      var productName1 = products[0].title;
-      var productLink1 = products[0].url;
-      var productPrice1 = products[0].price;
-      var productRating1 = products[0].rating
+      for (let i=0; i<products.length; i++){
+        var thumbnail = products[i].thumbnail;
+        var productName = products[i].title;
+        var productLink = products[i].url;
+        var productPrice = products[i].price;
+        var productRating = products[i].rating
+
+        var column = $('<div class="column"></div>');
+        $(".stackable-grid").append(column);
+        var displayCards = $('<div class="ui segment display-cards prod">');
+        $(column).append(displayCards);
+        var prodImageDiv = $('<div class="prod1-image">');
+        $(displayCards).append(prodImageDiv);
+        var prodImage = $('<img class="ui centered image product-image" />');
+        $(prodImage).attr('src', thumbnail);
+        $(prodImageDiv).append(prodImage);
+        var breakEl = $('<br /><br />');
+        $(displayCards).append(breakEl);
+        var prodText = $('<div class="ui center aligned prod-text">');
+        $(displayCards).append(prodText);
+        var prodLink = $('<a class="item product-link">List Item</a>');
+        $(prodLink).text(productName.slice(0, 19) + "...");
+        $(prodLink).attr('href', productLink);
+        $(prodText).append(prodLink);
+        var prodPrice = $('<p class="product-price"></p>');
+        $(prodPrice).text("Price: $" + productPrice);
+        $(prodText).append(prodPrice);
+        var prodRating = $('<p class="product-rating"></p>');
+        $(prodRating).text("Rating: " + productRating);
+        $(prodText).append(prodRating);
+
+      }
+      
 
       document.getElementById("product1-image").src = thumbnail1;
       document.getElementById("product1-link").innerHTML = (productName1.slice(0, 19) + "...");
@@ -244,6 +352,40 @@ for (var i=0; i<randomObjects.length; i++) {
 
 $('.item').click(function() {
   var object = $(this).text();
+  $('.stackable-grid').empty();
   console.log(object);
   amazonSearch(object);
 });
+// 
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+  infoWindow.setPosition(pos);
+  infoWindow.setContent(
+    browserHasGeolocation
+      ? "Error: The Geolocation service failed."
+      : "Error: Your browser doesn't support geolocation."
+  );
+  infoWindow.open(map);
+
+}
+
+//NOT complete
+//gets store information based on text input or lat and lon
+//https://developers.google.com/places/web-service/search
+//https://developers.google.com/maps/documentation/javascript/markers
+function storePlaces() {
+  url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=The%20Peaks%20Hongkong&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&locationbias&key=AIzaSyASRZUnw8T0CsDlOI92HxIuyYglJRmPauQ"
+  url2 = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + lattitude + "," + longitude + "&radius=1500&type=restaurant&keyword=cruise&key=AIzaSyASRZUnw8T0CsDlOI92HxIuyYglJRmPauQ";
+  console.log(url);
+  console.log(url2);
+
+   // Adds a marker to the map and push to the array.
+   function addMarker(location) {
+    var marker = new google.maps.Marker({
+      position: location,
+      map: map
+    });
+    markers.push(marker);
+  }
+}
+
+//END MAP LOGIC

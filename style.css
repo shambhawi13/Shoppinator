@@ -44,17 +44,17 @@
     padding-top: 2rem !important;
 }
 
-.prod1-image, .prod2-image, .prod3-image, .prod4-image {
+.prod-image {
     max-width: 50%;
     max-height: 50%;
     margin: auto;
 }
 
-#product1-image, #product2-image, #product3-image, #product4-image{
+.product-image{
     max-height: 120px;
 }
 
-.product1-price, .product2-price, .product3-price, .product4-price {
+.product-price {
     margin: 0;
 }
 
@@ -62,7 +62,7 @@
     text-align: center;
 }
 
-.prod-text1 {
+.prod-text {
     text-align: center;
 }
 
@@ -78,6 +78,10 @@
 
 .display-cards{
     height: 100%;
+}
+
+textarea{
+    border-color: lightblue !important;
 }
 
 @media screen and (max-width: 767px) {
@@ -101,3 +105,10 @@
         display: none !important;
     }
 }
+
+
+/* google api styling */
+#map {
+  height: 800px;  /* The height is 400 pixels */
+  width: 100%;  /* The width is the width of the web page */
+ }

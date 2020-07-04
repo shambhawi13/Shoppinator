@@ -1,120 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
-    <link rel="stylesheet" href="./style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css"
+    />
+    <link rel="stylesheet" href="./style.css" />
     <title>Shoppinator</title>
-</head>
-<body>
+  </head>
 
-
+  <body>
     <header class="ui borderless fluid huge menu">
+      <div class="item">
+        <img class="ui medium image" src="./assets/images/shop_logo1.png" />
+      </div>
 
-        <div class="item">
-            <img class="ui medium image" src="./assets/images/shop_logo1.png">
-        </div>
-        
+      <div class="right pointing menu nav-bar-menu">
+        <a class="item" href="./index.html">About</a>
+        <a class="item" href="./search.html">Search</a>
+      </div>
+    </header>
 
-        <div class="right pointing menu nav-bar-menu">
-            <a class="item" href="./index.html">About</a>
-            <a class="item" href="./search.html">Search</a>
-        </div>
-    </header> 
-    
-    
     <main class="ui grid">
-        <div class="row">
-            <div class="one wide column"></div>
-            <div class="four wide column">
-                
-                <div id="item-buttons" class="ui divided stackable items">
-                </div>
-
-            </div>
-            <div class="ten wide column">
-                <div class="ui placeholder segment">
-                    
-                    <div class="ui stackable four column grid">
-                        
-                        <div class="column">
-                            <div id="prod1" class="ui segment display-cards">
-
-                                <div class="prod1-image">
-                                  <img id="product1-image" class="ui centered image" src="">
-                                </div>
-                                <br><br>
-                                <div class="ui center aligned prod-text">
-                                  <a id="product1-link" class="item" href="">List Item</a>
-                                  <p class="product1-price"></p>
-                                  <p class="product1-rating"></p>
-                                </div>
-          
-                            </div>
-                        </div>
-                        <div class="column">
-                            <div id="prod2" class="ui segment display-cards">
-
-                                <div class="prod2-image">
-                                  <img id="product2-image" class="ui centered image" src="">
-                                </div>
-                                <br><br>
-                                <div class="ui center aligned prod-text">
-                                    <a id="product2-link" class="item" href="">List Item</a>
-                                    <p class="product2-price"></p>
-                                    <p class="product2-rating"></p>
-                                </div>
-          
-                            </div>
-                        </div>
-                        <div class="column">
-                            <div id="prod3" class="ui segment display-cards">
-
-                                <div class="prod3-image">
-                                    <img id="product3-image" class="ui centered image" src="">
-                                </div>
-                                <br><br>
-                                <div class="ui center aligned prod-text">
-                                    <a id="product3-link" class="item" href="">List Item</a>
-                                    <p class="product3-price"></p>
-                                    <p class="product3-rating"></p>
-                                </div>
-          
-                            </div>
-                        </div>
-                        <div class="column">
-                            <div id="prod4" class="ui segment display-cards">
-
-                                <div class="prod4-image">
-                                    <img id="product4-image" class="ui centered image" src="">
-                                </div>
-                                <br><br>
-                                <div class="ui center aligned prod-text">
-                                    <a id="product4-link" class="item" href="">List Item</a>
-                                    <p class="product4-price"></p>
-                                    <p class="product4-rating"></p>
-                                </div>
-          
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="one wide column"></div>
+      <div class="row">
+        <div class="one wide column"></div>
+        <div class="four wide column">
+          <div id="item-buttons" class="ui divided stackable items"></div>
         </div>
+        <div class="ten wide column display-div">
+          <div class="ui placeholder segment">
+            <div class="ui stackable four column grid stackable-grid">
+            </div>
+          </div>
+          <br />
+        </div>
+        <!-- map page -->
+        <div class="ten wide column display-map">
+          <div id="map"></div>
+        </div>
+        <div class="one wide column"></div>
+      </div>
     </main>
-    
-
-
-
-
-
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="./script.js"></script>
-</body>
+    <script
+      async
+      defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASRZUnw8T0CsDlOI92HxIuyYglJRmPauQ&callback=initMap"
+    ></script>
+  </body>
 </html>

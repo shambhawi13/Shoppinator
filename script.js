@@ -152,8 +152,8 @@ function showPosition(position) {
 }
 
 function amazonSearch(item) {
-    var items = item.join(",");
-    axios.get("https://amazon-product-reviews-keywords.p.rapidapi.com/product/search?country=US&keyword=" + items, {
+    // var items = item.join(",");
+    axios.get("https://amazon-product-reviews-keywords.p.rapidapi.com/product/search?country=US&keyword=" + item, {
       "headers": {
         "x-rapidapi-host": "amazon-product-reviews-keywords.p.rapidapi.com",
         "x-rapidapi-key": rapidAPIKey
@@ -175,6 +175,22 @@ function amazonSearch(item) {
     })
 }
 
-amazonSearch(["drone"]); //requires an array of strings
 
 var randomObjects = ["chair", "iphone", "laptop"];
+
+for (var i=0; i<randomObjects.length; i++) {
+  $("#item-buttons").append(`
+  <div class="ui vertical segment">
+    <div class="ui center aligned small header">
+      <button class="ui primary button item">${randomObjects[i]}</button>
+    </div>
+  </div>
+  `);
+
+}
+
+$('.item').click(function() {
+  var object = $(this).text();
+  console.log(object);
+  amazonSearch(object);
+});

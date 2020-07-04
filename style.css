@@ -62,10 +62,22 @@
     text-align: center;
 }
 
-#object-btn{
-    max-width: 80%;
+.prod-text1 {
     text-align: center;
-    margin: auto;
+}
+
+.object-btn{
+    max-width: 100%;
+    text-align: center;
+    margin: 0px !important;
+}
+
+.obj-button{
+    padding: 0px !important;
+}
+
+.display-cards{
+    height: 100%;
 }
 
 @media screen and (max-width: 767px) {

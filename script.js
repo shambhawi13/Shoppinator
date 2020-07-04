@@ -169,7 +169,7 @@ function amazonSearch(item) {
       var productRating1 = products[0].rating
 
       document.getElementById("product1-image").src = thumbnail1;
-      document.getElementById("product1-link").innerHTML = (productName1.slice(0, 25) + "...");
+      document.getElementById("product1-link").innerHTML = (productName1.slice(0, 19) + "...");
       document.getElementById("product1-link").href = productLink1;
       document.querySelector(".product1-price").textContent = ("Price: $" + productPrice1);
       document.querySelector(".product1-rating").textContent = ("Rating: " + productRating1);
@@ -181,7 +181,7 @@ function amazonSearch(item) {
       var productRating2 = products[1].rating
 
       document.getElementById("product2-image").src = thumbnail2;
-      document.getElementById("product2-link").innerHTML = (productName2.slice(0, 25) + "...");
+      document.getElementById("product2-link").innerHTML = (productName2.slice(0, 19) + "...");
       document.getElementById("product2-link").href = productLink2;
       document.querySelector(".product2-price").textContent = ("Price: $" + productPrice2);
       document.querySelector(".product2-rating").textContent = ("Rating: " + productRating2);
@@ -193,7 +193,7 @@ function amazonSearch(item) {
       var productRating3 = products[2].rating
 
       document.getElementById("product3-image").src = thumbnail3;
-      document.getElementById("product3-link").innerHTML = (productName3.slice(0, 25) + "...");
+      document.getElementById("product3-link").innerHTML = (productName3.slice(0, 19) + "...");
       document.getElementById("product3-link").href = productLink3;
       document.querySelector(".product3-price").textContent = ("Price: $" + productPrice3);
       document.querySelector(".product3-rating").textContent = ("Rating: " + productRating3);
@@ -205,7 +205,7 @@ function amazonSearch(item) {
       var productRating4 = products[3].rating
 
       document.getElementById("product4-image").src = thumbnail4;
-      document.getElementById("product4-link").innerHTML = (productName4.slice(0, 25) + "...");
+      document.getElementById("product4-link").innerHTML = (productName4.slice(0, 19) + "...");
       document.getElementById("product4-link").href = productLink4;
       document.querySelector(".product4-price").textContent = ("Price: $" + productPrice4);
       document.querySelector(".product4-rating").textContent = ("Rating: " + productRating4);
@@ -235,8 +235,8 @@ var randomObjects = ["chair", "iphone", "laptop"];
 
 for (var i=0; i<randomObjects.length; i++) {
   $("#item-buttons").append(`
-    <div class="ui segment center aligned small">
-      <button id="object-btn" class="ui fluid primary button item">${randomObjects[i]}</button>
+    <div class="ui segment center aligned small obj-button">
+      <button class="ui fluid primary button item object-btn"><p class="prod-text1">${randomObjects[i]}</p></button>
     </div>
   `);
 

@@ -44,6 +44,42 @@
     padding-top: 2rem !important;
 }
 
+.prod-image {
+    max-width: 50%;
+    max-height: 50%;
+    margin: auto;
+}
+
+.product-image{
+    max-height: 120px;
+}
+
+.product-price {
+    margin: 0;
+}
+
+.prod-text {
+    text-align: center;
+}
+
+.prod-text {
+    text-align: center;
+}
+
+.object-btn{
+    max-width: 100%;
+    text-align: center;
+    margin: 0px !important;
+}
+
+.obj-button{
+    padding: 0px !important;
+}
+
+.display-cards{
+    height: 100%;
+}
+
 textarea{
     border-color: lightblue !important;
 }

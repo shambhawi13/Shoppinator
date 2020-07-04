@@ -4,16 +4,16 @@
 
 
 // Please replace the API key below:
-var rapidAPIKey = 'c6064b5170msh977e24b1ae6c804p17fd8djsnf539fedd1d13';
+var rapidAPIKey = '1bf62c9debmsh3edd1466134defbp184527jsn0116cb66a76e';
 var resultObject;
 //default value on page load
 var storeType = 'online';
 var accordSelected = 'image';
 var b64;
 
-$('.ui.accordion')
-    .accordion()
-    ;
+// $('.ui.accordion')
+//     .accordion()
+//     ;
 
 $('.toggle-store-online input[type="checkbox"]').click(function () {
     if ($(this).is(":checked")) {
@@ -96,7 +96,7 @@ $('.submit-button').on('click', (event) => {
             });
         }
         else {
-            var imageUrl = $('.form-image-url textarea').val().trim();
+            var imageUrl = $('.form-image-url input').val().trim();
             var settings = {
                 "async": true,
                 "crossDomain": true,
@@ -231,6 +231,131 @@ function initMap() {
   }
 }
 
+function amazonSearch(item) {
+    // var items = item.join(",");
+    axios.get("https://amazon-product-reviews-keywords.p.rapidapi.com/product/search?country=US&keyword=" + item, {
+      "headers": {
+        "x-rapidapi-host": "amazon-product-reviews-keywords.p.rapidapi.com",
+        "x-rapidapi-key": rapidAPIKey
+      }
+    })
+    .then(response => {
+      console.log(response);
+      var products = response.data.products;
+      for (let i=0; i<products.length; i++){
+        var thumbnail = products[i].thumbnail;
+        var productName = products[i].title;
+        var productLink = products[i].url;
+        var productPrice = products[i].price;
+        var productRating = products[i].rating
+
+        var column = $('<div class="column"></div>');
+        $(".stackable-grid").append(column);
+        var displayCards = $('<div class="ui segment display-cards prod">');
+        $(column).append(displayCards);
+        var prodImageDiv = $('<div class="prod1-image">');
+        $(displayCards).append(prodImageDiv);
+        var prodImage = $('<img class="ui centered image product-image" />');
+        $(prodImage).attr('src', thumbnail);
+        $(prodImageDiv).append(prodImage);
+        var breakEl = $('<br /><br />');
+        $(displayCards).append(breakEl);
+        var prodText = $('<div class="ui center aligned prod-text">');
+        $(displayCards).append(prodText);
+        var prodLink = $('<a class="item product-link">List Item</a>');
+        $(prodLink).text(productName.slice(0, 19) + "...");
+        $(prodLink).attr('href', productLink);
+        $(prodText).append(prodLink);
+        var prodPrice = $('<p class="product-price"></p>');
+        $(prodPrice).text("Price: $" + productPrice);
+        $(prodText).append(prodPrice);
+        var prodRating = $('<p class="product-rating"></p>');
+        $(prodRating).text("Rating: " + productRating);
+        $(prodText).append(prodRating);
+
+      }
+      
+
+      document.getElementById("product1-image").src = thumbnail1;
+      document.getElementById("product1-link").innerHTML = (productName1.slice(0, 19) + "...");
+      document.getElementById("product1-link").href = productLink1;
+      document.querySelector(".product1-price").textContent = ("Price: $" + productPrice1);
+      document.querySelector(".product1-rating").textContent = ("Rating: " + productRating1);
+
+      var thumbnail2 = products[1].thumbnail;
+      var productName2 = products[1].title;
+      var productLink2 = products[1].url;
+      var productPrice2 = products[1].price;
+      var productRating2 = products[1].rating
+
+      document.getElementById("product2-image").src = thumbnail2;
+      document.getElementById("product2-link").innerHTML = (productName2.slice(0, 19) + "...");
+      document.getElementById("product2-link").href = productLink2;
+      document.querySelector(".product2-price").textContent = ("Price: $" + productPrice2);
+      document.querySelector(".product2-rating").textContent = ("Rating: " + productRating2);
+
+      var thumbnail3 = products[2].thumbnail;
+      var productName3 = products[2].title;
+      var productLink3 = products[2].url;
+      var productPrice3 = products[2].price;
+      var productRating3 = products[2].rating
+
+      document.getElementById("product3-image").src = thumbnail3;
+      document.getElementById("product3-link").innerHTML = (productName3.slice(0, 19) + "...");
+      document.getElementById("product3-link").href = productLink3;
+      document.querySelector(".product3-price").textContent = ("Price: $" + productPrice3);
+      document.querySelector(".product3-rating").textContent = ("Rating: " + productRating3);
+
+      var thumbnail4 = products[3].thumbnail;
+      var productName4 = products[3].title;
+      var productLink4 = products[3].url;
+      var productPrice4 = products[3].price;
+      var productRating4 = products[3].rating
+
+      document.getElementById("product4-image").src = thumbnail4;
+      document.getElementById("product4-link").innerHTML = (productName4.slice(0, 19) + "...");
+      document.getElementById("product4-link").href = productLink4;
+      document.querySelector(".product4-price").textContent = ("Price: $" + productPrice4);
+      document.querySelector(".product4-rating").textContent = ("Rating: " + productRating4);
+      // for (var i=0; i<4; i++){
+      //   var products = response.data.products;
+      //   var thumbnail1 = products[0].thumbnail;
+      //   var productName1 = products[0].title;
+      //   var productLink1 = products[0].url;
+      //   var productPrice = products[0].price;
+      //   var productRating = products[0].rating
+
+      //   document.getElementById(`product${i + 1}-image`).src = thumbnail1;
+      //   document.getElementById(`product${i + 1}-link`).innerHTML = productName1.split(",")[0];
+      //   document.getElementById(`product${i + 1}-link`).href = productLink1;
+      //   document.querySelector(`.product${i + 1}-price`).textContent = ("Price: $" + productPrice);
+      //   document.querySelector(`.product${i + 1}-rating`).textContent = ("Rating: " + productRating);
+      // }
+
+    })
+    .catch(error => {
+      console.log(error);
+    })
+}
+
+
+var randomObjects = ["chair", "iphone", "laptop"];
+
+for (var i=0; i<randomObjects.length; i++) {
+  $("#item-buttons").append(`
+    <div class="ui segment center aligned small obj-button">
+      <button class="ui fluid primary button item object-btn"><p class="prod-text1">${randomObjects[i]}</p></button>
+    </div>
+  `);
+
+}
+
+$('.item').click(function() {
+  var object = $(this).text();
+  $('.stackable-grid').empty();
+  console.log(object);
+  amazonSearch(object);
+});
 // 
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   infoWindow.setPosition(pos);

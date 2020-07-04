@@ -69,3 +69,10 @@ textarea{
         display: none !important;
     }
 }
+
+
+/* google api styling */
+#map {
+  height: 800px;  /* The height is 400 pixels */
+  width: 100%;  /* The width is the width of the web page */
+ }

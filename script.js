@@ -19,10 +19,14 @@ $('.toggle-store-online input[type="checkbox"]').click(function () {
     if ($(this).is(":checked")) {
         storeType = 'store';
         console.log("Checkbox is checked." + storeType);
+        // $(".display-map").attr("style","display: inline-block !important");
+        // $(".display-div").attr("style","display: none !important");
     }
     else if ($(this).is(":not(:checked)")) {
         storeType = 'online';
         console.log("Checkbox is unchecked." + storeType);
+        // $(".display-div").attr("style","display: inline-block !important");
+        // $(".display-map").attr("style","display: none !important");
     }
 });
 
@@ -160,23 +164,103 @@ $('.submit-button').on('click', (event) => {
 /* Result Page */
 
 function getLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.watchPosition(showPosition);
-    } else {
-        console.log("Geolocation is not supported by this browser.");
-    }
+  if (navigator.geolocation) {
+    navigator.geolocation.watchPosition(showPosition);
+  } else {
+    console.log("Geolocation is not supported by this browser.");
+  }
 }
 
 function showPosition(position) {
-    console.log("Latitude: " + position.coords.latitude +
-        " Longitude: " + position.coords.longitude);
+  console.log("Latitude: " + position.coords.latitude +
+    " Longitude: " + position.coords.longitude);
 
-    var latlon = position.coords.latitude + "," + position.coords.longitude;
+  var latlon = position.coords.latitude + "," + position.coords.longitude;
 
-    //var img_url = "https://maps.googleapis.com/maps/api/staticmap?center=" + latlon + " & zoom=14 & size=400x300 & sensor=false & key=" + "AIzaSyBhIY-oXFJCLXLjRZz4GvKJeOlzMTcHxcA";
+  //var img_url = "https://maps.googleapis.com/maps/api/staticmap?center=" + latlon + " & zoom=14 & size=400x300 & sensor=false & key=" + "AIzaSyBhIY-oXFJCLXLjRZz4GvKJeOlzMTcHxcA";
 
-    //document.getElementById("mapholder").innerHTML = "<img src='" + img_url + "'>";
-    console.log("coords: " + latlon);
+  //document.getElementById("mapholder").innerHTML = "<img src='" + img_url + "'>";
+  console.log("coords: " + latlon);
 }
 
 
+// START MAP LOGIC HERE
+//variables to hold users position
+var lattitude;
+var longitude;
+var markers = [];// array to hold places
+
+/*get users location */
+var map, infoWindow;
+function initMap() {
+  map = new google.maps.Map(document.getElementById("map"), {
+    center: { lat: 37.75, lng: -122.44 },
+    zoom: 12
+
+  });
+
+  //instantiates new tool window
+  infoWindow = new google.maps.InfoWindow();
+
+  // Try HTML5 geolocation.
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      function (position) {
+        pos = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+        //set variables for user location
+        lattitude = position.coords.latitude;
+        //console.log(lattitude);
+        longitude = position.coords.longitude;
+        //console.log(longitude);
+        infoWindow.setPosition(pos);
+        infoWindow.setContent("Your Location.");
+        infoWindow.open(map);
+        map.setCenter(pos);
+        storePlaces(); //
+      },
+      function () {
+        handleLocationError(true, infoWindow, map.getCenter());
+      }
+    );
+  } else {
+    // Browser doesn't support Geolocation
+    handleLocationError(false, infoWindow, map.getCenter());
+  }
+}
+
+// 
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+  infoWindow.setPosition(pos);
+  infoWindow.setContent(
+    browserHasGeolocation
+      ? "Error: The Geolocation service failed."
+      : "Error: Your browser doesn't support geolocation."
+  );
+  infoWindow.open(map);
+
+}
+
+//NOT complete
+//gets store information based on text input or lat and lon
+//https://developers.google.com/places/web-service/search
+//https://developers.google.com/maps/documentation/javascript/markers
+function storePlaces() {
+  url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=The%20Peaks%20Hongkong&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&locationbias&key=AIzaSyASRZUnw8T0CsDlOI92HxIuyYglJRmPauQ"
+  url2 = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + lattitude + "," + longitude + "&radius=1500&type=restaurant&keyword=cruise&key=AIzaSyASRZUnw8T0CsDlOI92HxIuyYglJRmPauQ";
+  console.log(url);
+  console.log(url2);
+
+   // Adds a marker to the map and push to the array.
+   function addMarker(location) {
+    var marker = new google.maps.Marker({
+      position: location,
+      map: map
+    });
+    markers.push(marker);
+  }
+}
+
+//END MAP LOGIC

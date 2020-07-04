@@ -23,16 +23,19 @@
             </div>
     </header>
 
-    <main class="ui grid">
-        <div class="row">
-            <div class="two wide column">
+    <main class="ui grid main-content">
+        <div class="ui inverted centered inline dimmer">
+            <div class="ui text loader">Loading</div>
+          </div>
+        <div class="row no-pad-bottom">
+            <div class="three wide column">
 
             </div>
-            <div class="twelve wide column">
+            <div class="ten wide column">
 
                 <!-- accordian-->
                 <div class="ui styled fluid accordion">
-                    <div class="active title">
+                    <div class="active title" id="imageAccord">
                         <i class="dropdown icon"></i>
                         Search by Image
                     </div>
@@ -41,39 +44,41 @@
                         <!-- virtical divider-->
                         <div class="ui placeholder segment">
                             <div class="ui two column very relaxed stackable grid">
-                              <div class="column">
-                                <div class="ui form">
-                                  <div class="field">
-                                    <p>Please click on upload button to upload an image. Maximum image size allowed is 5MB</p>
-                                    <button class="ui labeled icon primary basic button upload">
-                                        <i class="upload icon"></i>
-                                        Upload
-                                    </button>
-                                  </div>
-                                </div>
-                              </div>
-                              <!-- horizontal divider -->
-                              <div class="ui center aligned basic segment column horizontal-div">
-                                <div class="ui horizontal divider">Or</div>
-                              </div>
-                              
-                              <div class="middle aligned column image-url-section">
-                                <div class="ui form form-image-url">
-                                    <div class="field">
-                                      <p>Provide Image URL</p>
-                                      <input type="text" placeholder="Image URL">
+                                <div class="column">
+                                    <div class="ui form">
+                                        <div class="field">
+                                            <p>Please click on upload button to upload an image. Maximum image size
+                                                allowed is 5MB</p>
+
+                                            <input id="fileInput" type="file" style="display:none;" accept="image/png, image/jpeg" />
+                                            <button value="upload" class="ui labeled icon primary basic button upload"
+                                                onclick="uploadImage()" >
+                                                <i class="upload icon"></i> Upload
+                                            </button>
+                                            <div class="ui pointing label upload info hide" id="uploadedFileName"></div>
+                                        </div>
                                     </div>
-                                  </div>
-                              </div>
+                                </div>
+                                <!-- horizontal divider -->
+                                <div class="ui center aligned basic segment column horizontal-div">
+                                    <div class="ui horizontal divider">Or</div>
+                                </div>
+
+                                <div class="middle aligned column image-url-section">
+                                    <div class="ui form form-image-url">
+                                        <div class="field">
+                                            <label>Provide Image URL</label>
+                                            <textarea placeholder="Image URL"></textarea>
+                                          </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="ui vertical divider">
-                              Or
+                                Or
                             </div>
-                          </div>
+                        </div>
                     </div>
-
-                    
-                    <div class="title">
+                    <div class="title" id="textAccord">
                         <i class="dropdown icon"></i>
                         Search by Text
                     </div>
@@ -83,7 +88,7 @@
                             <div class="ui divider"></div>
                             <div class="field">
                                 <label>Product Name</label>
-                                <input type="text" placeholder="Product name">
+                                <input type="text" placeholder="Product name" id="product-name">
                                 <div class="ui pointing label hide">
                                     Please enter a product name
                                 </div>
@@ -91,11 +96,11 @@
                             <div class="ui divider"></div>
                             <div class="field" placeholder="Last Name">
                                 <label>Product Type</label>
-                                <select class="ui fluid search dropdown" name="type">
+                                <select class="ui fluid search dropdown" name="type" id="product-type">
                                     <option value="">Electronics</option>
                                     <option value="1">Furniture</option>
                                     <option value="2">Decoratives</option>
-                                  </select>
+                                </select>
                                 <div class="ui pointing label hide">
                                     Please enter a product Type
                                 </div>
@@ -113,36 +118,25 @@
 
                     </div>
                 </div>
-
-            </div>
-            <div class="two wide column">
-
-            </div>
-        </div>
-        <div class="row">
-            <div class="two wide column">
-            </div>
-            <div class="twelve wide column">
                 <!--toggle button-->
                 <div class="ui form segment toggle-store-online">
                     <div class="field">
-                      <div class="ui toggle checkbox">
-                        <input type="checkbox" name="store" tabindex="0">
-                        <label>Would you like to purchase in-store</label>
-                      </div>
+                        <div class="ui toggle checkbox">
+                            <input type="checkbox" name="store" tabindex="0">
+                            <label>Would you like to purchase in-store</label>
+                        </div>
                     </div>
-                  </div>
-
-                <input type="button" class="ui primary button" value="Submit">
-
+                </div>
+                <input type="button" class="ui primary button submit-button" value="Submit">
             </div>
-            <div class="two wide column">
+            <div class="three wide column">
             </div>
         </div>
     </main>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
     <script src="./script.js"></script>
 </body>
 

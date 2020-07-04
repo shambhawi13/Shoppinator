@@ -12,145 +12,149 @@ var accordSelected = 'image';
 var b64;
 
 $('.ui.accordion')
-  .accordion()
-  ;
+    .accordion()
+    ;
 
 $('.toggle-store-online input[type="checkbox"]').click(function () {
-  if ($(this).is(":checked")) {
-    storeType = 'store';
-    console.log("Checkbox is checked." + storeType);
-  }
-  else if ($(this).is(":not(:checked)")) {
-    storeType = 'online';
-    console.log("Checkbox is unchecked." + storeType);
-  }
+    if ($(this).is(":checked")) {
+        storeType = 'store';
+        console.log("Checkbox is checked." + storeType);
+        // $(".display-map").attr("style","display: inline-block !important");
+        // $(".display-div").attr("style","display: none !important");
+    }
+    else if ($(this).is(":not(:checked)")) {
+        storeType = 'online';
+        console.log("Checkbox is unchecked." + storeType);
+        // $(".display-div").attr("style","display: inline-block !important");
+        // $(".display-map").attr("style","display: none !important");
+    }
 });
 
 $('#imageAccord').on('click', () => {
-  accordSelected = 'image';
-  console.log("Image accord selected: " + accordSelected);
+    accordSelected = 'image';
+    console.log("Image accord selected: " + accordSelected);
 });
 
 $('#textAccord').on('click', () => {
-  accordSelected = 'text';
-  console.log("Text accord selected: " + accordSelected);
+    accordSelected = 'text';
+    console.log("Text accord selected: " + accordSelected);
 });
 
 function uploadImage() {
-  document.getElementById('fileInput').click();
+    document.getElementById('fileInput').click();
 }
 
 //converts image to base 64
 function readFile() {
-  if (this.files && this.files[0]) {
-    $('#uploadedFileName').removeClass('hide');
-    $('#uploadedFileName').text(this.files[0].name);
-    var FR = new FileReader();
-    $(FR).on("load", function (e) {
-      //console.log('b64 result: ' + e.target.result);
-      b64 = e.target.result;
+    if (this.files && this.files[0]) {
+        $('#uploadedFileName').removeClass('hide');
+        $('#uploadedFileName').text(this.files[0].name);
+        var FR = new FileReader();
+        $(FR).on("load", function (e) {
+            //console.log('b64 result: ' + e.target.result);
+            b64 = e.target.result;
 
-    });
-    FR.readAsDataURL(this.files[0]);
-  }
+        });
+        FR.readAsDataURL(this.files[0]);
+    }
 }
 
 $("#fileInput").on("change", readFile);
 
 $('.submit-button').on('click', (event) => {
-  event.preventDefault();
+    event.preventDefault();
 
-  // show loader
-  $('.dimmer').addClass('active');
+    // show loader
+    $('.dimmer').addClass('active');
 
-  if (accordSelected === 'image') {
+    if (accordSelected === 'image') {
 
-    if (b64) {
-      var settings = {
-        "async": true,
-        "crossDomain": true,
-        "url": "https://google-ai-vision.p.rapidapi.com/cloudVision/imageObjectDetection",
-        "method": "POST",
-        "headers": {
-          "x-rapidapi-host": "google-ai-vision.p.rapidapi.com",
-          "x-rapidapi-key": rapidAPIKey,
-          "content-type": "application/json",
-          "accept": "application/json"
-        },
-        "processData": false,
-        "data": "{ \"source\":\"" + b64 + "\", \"sourceType\": \"base64\"}"
-      }
-      $.ajax(settings).done(function (response) {
-        console.log(response);
-        localStorage.setItem('scanned-image', JSON.stringify(response.objects));
-        resultObject = _.map(response.objects, 'name');
+        if (b64) {
+            var settings = {
+                "async": true,
+                "crossDomain": true,
+                "url": "https://google-ai-vision.p.rapidapi.com/cloudVision/imageObjectDetection",
+                "method": "POST",
+                "headers": {
+                    "x-rapidapi-host": "google-ai-vision.p.rapidapi.com",
+                    "x-rapidapi-key": rapidAPIKey,
+                    "content-type": "application/json",
+                    "accept": "application/json"
+                },
+                "processData": false,
+                "data": "{ \"source\":\"" + b64 + "\", \"sourceType\": \"base64\"}"
+            }
+            $.ajax(settings).done(function (response) {
+                console.log(response);
+                localStorage.setItem('scanned-image', JSON.stringify(response.objects));
+                resultObject = _.map(response.objects, 'name');
+                resultObject = _.uniq(resultObject);
+                //remove loader
+                $('.dimmer').removeClass('active');
+                // navigate to results page
+                window.location.href = "./result.html";
+            });
+        }
+        else {
+            var imageUrl = $('.form-image-url textarea').val().trim();
+            var settings = {
+                "async": true,
+                "crossDomain": true,
+                "url": "https://google-ai-vision.p.rapidapi.com/cloudVision/imageObjectDetection",
+                "method": "POST",
+                "headers": {
+                    "x-rapidapi-host": "google-ai-vision.p.rapidapi.com",
+                    "x-rapidapi-key": rapidAPIKey,
+                    "content-type": "application/json",
+                    "accept": "application/json"
+                },
+                "processData": false,
+                "data": "{ \"source\":\"" + imageUrl + "\", \"sourceType\": \"url\"}"
+            }
+
+            var storesResponse = JSON.parse(localStorage.getItem('scanned-image'));
+            //to be removed later
+            if (storesResponse && storesResponse.length > 0) {
+                console.log('Stored in local storage');
+                //lodash to map names from response
+                console.log(_.map(storesResponse, 'name'));
+                resultObject = _.map(storesResponse, 'name');
+                resultObject = _.uniq(resultObject);
+                //remove loader
+                $('.dimmer').removeClass('active');
+                getLocation();
+                // navigate to results page
+                window.location.href = "./result.html";
+            }
+            else {
+                $.ajax(settings).done(function (response) {
+                    console.log(response);
+                    localStorage.setItem('scanned-image', JSON.stringify(response.objects));
+                    resultObject = _.map(response.objects, 'name');
+                    resultObject = _.uniq(resultObject);
+                    //remove loader
+                    $('.dimmer').removeClass('active');
+                }).then(() => {
+                    //call function that performs all task in result page
+                    getLocation();
+                    // navigate to results page
+                    window.location.href = "./result.html";
+                });
+            }
+
+        }
+
+    }
+    else if (accordSelected === 'text') {
+        resultObject = [];
+        let productName = $('#product-name').val().trim();
+        resultObject.push(productName);
         resultObject = _.uniq(resultObject);
         //remove loader
         $('.dimmer').removeClass('active');
         // navigate to results page
         window.location.href = "./result.html";
-      });
     }
-    else {
-      var imageUrl = $('.form-image-url textarea').val().trim();
-      var settings = {
-        "async": true,
-        "crossDomain": true,
-        "url": "https://google-ai-vision.p.rapidapi.com/cloudVision/imageObjectDetection",
-        "method": "POST",
-        "headers": {
-          "x-rapidapi-host": "google-ai-vision.p.rapidapi.com",
-          "x-rapidapi-key": rapidAPIKey,
-          "content-type": "application/json",
-          "accept": "application/json"
-        },
-        "processData": false,
-        "data": "{ \"source\":\"" + imageUrl + "\", \"sourceType\": \"url\"}"
-      }
-
-      var storesResponse = JSON.parse(localStorage.getItem('scanned-image'));
-      //to be removed later
-      if (storesResponse && storesResponse.length > 0) {
-        console.log('Stored in local storage');
-        //lodash to map names from response
-        console.log(_.map(storesResponse, 'name'));
-        resultObject = _.map(storesResponse, 'name');
-        resultObject = _.uniq(resultObject);
-        //remove loader
-        $('.dimmer').removeClass('active');
-        getLocation();
-        // navigate to results page
-        window.location.href = "./result.html";
-      }
-      else {
-        $.ajax(settings).done(function (response) {
-          console.log(response);
-          localStorage.setItem('scanned-image', JSON.stringify(response.objects));
-          resultObject = _.map(response.objects, 'name');
-          resultObject = _.uniq(resultObject);
-          //remove loader
-          $('.dimmer').removeClass('active');
-        }).then(() => {
-          //call function that performs all task in result page
-          getLocation();
-          // navigate to results page
-          window.location.href = "./result.html";
-        });
-      }
-
-    }
-
-  }
-  else if (accordSelected === 'text') {
-    resultObject = [];
-    let productName = $('#product-name').val().trim();
-    resultObject.push(productName);
-    resultObject = _.uniq(resultObject);
-    //remove loader
-    $('.dimmer').removeClass('active');
-    // navigate to results page
-    window.location.href = "./result.html";
-  }
 
 });
 
@@ -242,6 +246,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 //NOT complete
 //gets store information based on text input or lat and lon
 //https://developers.google.com/places/web-service/search
+//https://developers.google.com/maps/documentation/javascript/markers
 function storePlaces() {
   url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=The%20Peaks%20Hongkong&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&locationbias&key=AIzaSyASRZUnw8T0CsDlOI92HxIuyYglJRmPauQ"
   url2 = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + lattitude + "," + longitude + "&radius=1500&type=restaurant&keyword=cruise&key=AIzaSyASRZUnw8T0CsDlOI92HxIuyYglJRmPauQ";

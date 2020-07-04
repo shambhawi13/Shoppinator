@@ -162,13 +162,68 @@ function amazonSearch(item) {
     .then(response => {
       console.log(response);
       var products = response.data.products;
-      var thumbnail = products[0].thumbnail;
-      var productName = products[0].title;
-      var productLink = products[0].url;
+      var thumbnail1 = products[0].thumbnail;
+      var productName1 = products[0].title;
+      var productLink1 = products[0].url;
+      var productPrice1 = products[0].price;
+      var productRating1 = products[0].rating
 
-      document.getElementById("product1-image").src = thumbnail;
-      document.getElementById("product1-link").innerHTML = productName;
-      document.getElementById("product1-link").href = productLink;
+      document.getElementById("product1-image").src = thumbnail1;
+      document.getElementById("product1-link").innerHTML = (productName1.slice(0, 25) + "...");
+      document.getElementById("product1-link").href = productLink1;
+      document.querySelector(".product1-price").textContent = ("Price: $" + productPrice1);
+      document.querySelector(".product1-rating").textContent = ("Rating: " + productRating1);
+
+      var thumbnail2 = products[1].thumbnail;
+      var productName2 = products[1].title;
+      var productLink2 = products[1].url;
+      var productPrice2 = products[1].price;
+      var productRating2 = products[1].rating
+
+      document.getElementById("product2-image").src = thumbnail2;
+      document.getElementById("product2-link").innerHTML = (productName2.slice(0, 25) + "...");
+      document.getElementById("product2-link").href = productLink2;
+      document.querySelector(".product2-price").textContent = ("Price: $" + productPrice2);
+      document.querySelector(".product2-rating").textContent = ("Rating: " + productRating2);
+
+      var thumbnail3 = products[2].thumbnail;
+      var productName3 = products[2].title;
+      var productLink3 = products[2].url;
+      var productPrice3 = products[2].price;
+      var productRating3 = products[2].rating
+
+      document.getElementById("product3-image").src = thumbnail3;
+      document.getElementById("product3-link").innerHTML = (productName3.slice(0, 25) + "...");
+      document.getElementById("product3-link").href = productLink3;
+      document.querySelector(".product3-price").textContent = ("Price: $" + productPrice3);
+      document.querySelector(".product3-rating").textContent = ("Rating: " + productRating3);
+
+      var thumbnail4 = products[3].thumbnail;
+      var productName4 = products[3].title;
+      var productLink4 = products[3].url;
+      var productPrice4 = products[3].price;
+      var productRating4 = products[3].rating
+
+      document.getElementById("product4-image").src = thumbnail4;
+      document.getElementById("product4-link").innerHTML = (productName4.slice(0, 25) + "...");
+      document.getElementById("product4-link").href = productLink4;
+      document.querySelector(".product4-price").textContent = ("Price: $" + productPrice4);
+      document.querySelector(".product4-rating").textContent = ("Rating: " + productRating4);
+      // for (var i=0; i<4; i++){
+      //   var products = response.data.products;
+      //   var thumbnail1 = products[0].thumbnail;
+      //   var productName1 = products[0].title;
+      //   var productLink1 = products[0].url;
+      //   var productPrice = products[0].price;
+      //   var productRating = products[0].rating
+
+      //   document.getElementById(`product${i + 1}-image`).src = thumbnail1;
+      //   document.getElementById(`product${i + 1}-link`).innerHTML = productName1.split(",")[0];
+      //   document.getElementById(`product${i + 1}-link`).href = productLink1;
+      //   document.querySelector(`.product${i + 1}-price`).textContent = ("Price: $" + productPrice);
+      //   document.querySelector(`.product${i + 1}-rating`).textContent = ("Rating: " + productRating);
+      // }
+
     })
     .catch(error => {
       console.log(error);
@@ -180,7 +235,7 @@ var randomObjects = ["chair", "iphone", "laptop"];
 
 for (var i=0; i<randomObjects.length; i++) {
   $("#item-buttons").append(`
-  <div class="ui vertical segment">
+  <div class="ui segment">
     <div class="ui center aligned small header">
       <button class="ui primary button item">${randomObjects[i]}</button>
     </div>

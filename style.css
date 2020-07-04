@@ -44,6 +44,24 @@
     padding-top: 2rem !important;
 }
 
+.prod1-image, .prod2-image, .prod3-image, .prod4-image {
+    max-width: 50%;
+    max-height: 50%;
+    margin: auto;
+}
+
+#product1-image, #product2-image, #product3-image, #product4-image{
+    max-height: 120px;
+}
+
+.product1-price, .product2-price, .product3-price, .product4-price {
+    margin: 0;
+}
+
+.prod-text {
+    text-align: center;
+}
+
 @media screen and (max-width: 767px) {
     .vertical{
         visibility: hidden !important;

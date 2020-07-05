@@ -115,7 +115,7 @@ $('.submit-button').on('click', (event) => {
                     "accept": "application/json"
                 },
                 "processData": false,
-                "data": "{ \"source\":\"" + imageUrl + "\", \"sourceType\": \"rl\"}"
+                "data": "{ \"source\":\"" + imageUrl + "\", \"sourceType\": \"url\"}"
             }
 
             var storesResponse = JSON.parse(localStorage.getItem('scanned-image'));

@@ -277,11 +277,22 @@ function generateList(resultObject) {
     }
 }
 
-$(document).on('click', '.item', function (event){
+
+$(document).on('click', '.item', function (event) {
     var object = $(this).text();
-    $('.stackable-grid').empty();
-    console.log(object);
-    amazonSearch(object);
+    $(".object-btn").removeClass("clicked-btn");
+    $(this).addClass("clicked-btn");
+    
+    if (storeType === "online") {
+        $('.stackable-grid').empty();
+        console.log(object);
+        amazonSearch(object);
+    }
+    else if (storeType === "store") {
+        $(".map-loader").addClass("active");
+        storePlaces(object);
+    }
+
 });
 
 
@@ -335,10 +346,8 @@ function initMap() {
                 infoWindow.open(map);
                 map.setCenter(pos);
 
-                // loader
-                $(".map-loader").addClass("active");
                 //call function to get places
-                storePlaces();
+                //storePlaces();
             },
             function () {
                 handleLocationError(true, infoWindow, map.getCenter());
@@ -354,17 +363,19 @@ function initMap() {
 //gets store information based on text input or lat and lon
 //https://developers.google.com/places/web-service/search
 //https://developers.google.com/maps/documentation/javascript/markers
-function storePlaces() {
-    
+function storePlaces(keyword) {
+
     //find place from text
     //url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=The%20Peaks%20Hongkong&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&locationbias&key=AIzaSyASRZUnw8T0CsDlOI92HxIuyYglJRmPauQ"
-    
+
 
     //find places nearby
     radius = "radius=5000";
     type = "type=store";
-    keyword = "keyword=furniture";
+    keyword = `keyword=${keyword}`;
     apiKey = "key=AIzaSyASRZUnw8T0CsDlOI92HxIuyYglJRmPauQ";
+
+
     placesUrl = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + lattitude + "," + longitude + "&" + radius + "&" + type + "&" + keyword + "&" + apiKey;
     // console.log(url);
     //console.log(placesUrl);
@@ -393,7 +404,7 @@ function storePlaces() {
                 map: map,
                 title: name
             });
-            
+
 
             //add the marker to the map
             marker.setMap(map);

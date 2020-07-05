@@ -99,7 +99,7 @@ $('.submit-button').on('click', (event) => {
             });
         }
         else {
-            var imageUrl = $('.form-image-url input').val().trim();
+            var imageUrl = $('.form-image-url textarea').val().trim();
             var settings = {
                 "async": true,
                 "crossDomain": true,

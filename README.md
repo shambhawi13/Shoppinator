@@ -4,10 +4,8 @@
 ```
 Here is screenshot of how it looks.
 ```
-
-![shopping](/Assets/final.png)
-![searching](/assets/images/ss-search-text.png)
-![map results](/assets/images/ss-search-text-result.png)
+![image search](/assets/images/shoppinator-search-image.gif)
+![text search](/assets/images/shoppinator-search-text.gif)
 
 
 ## Prerequisites

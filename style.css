@@ -1,18 +1,15 @@
 
 /* this affects the about page only */
 #landingPage{
-    background-image: url("assets/images/bg1.jpg");
-    /* opacity:0.8; */
+    background-image: url(https://i.ytimg.com/vi/brD2aR7Dr0s/maxresdefault.jpg);
+    background-size: 100%;
 }
 
-#aboutUs {
-    top: 25%;
-    font-size: x-large;
-}
-
-.main-content{
+.main-content, main{
+    font-family: 'Noto Sans JP', sans-serif;
     padding-top: 5rem !important;
-    background-image: url(https://cb2.scene7.com/is/image/CB2/122919_m_super_furniture_living?wid=670&qlt=65);
+    background-image: url('https://img.freepik.com/free-photo/shopping-cart-chalkboard_165073-68.jpg?size=626&ext=jpg');
+    background-size: 100%;
     height: 100%;
 }
 
@@ -33,7 +30,7 @@
 }
 
 .nav-bar-menu{
-    margin-right: 1em !important;
+    justify-content: flex-end;
 }
 
 .toggle-store-online{
@@ -94,6 +91,9 @@ textarea{
     .upload{
         margin-left: auto !important;
     }
+    .display-div{
+        width: 100% !important;
+    }
     
 }
 
@@ -109,7 +109,7 @@ textarea{
 
 /* google api styling */
 #map {
-  height: 800px;  /* The height is 400 pixels */
+  height: 45rem;  /* The height is 400 pixels */
   width: 100%;  /* The width is the width of the web page */
  }
 
@@ -123,4 +123,45 @@ textarea{
 
 .stackable-grid{
     text-align: center !important;
+    background-color: initial !important;
 }
+
+.result-content-rows{
+    overflow: scroll;
+    height: 100%;
+}
+
+#item-buttons{
+    position: sticky;
+    top: 0rem;
+}
+
+.instore-online-toggle{
+    background-color: lightblue;
+}
+
+.submit-button , .display-cards {
+    transition: transform .2s; 
+}
+  
+.submit-button:hover , .display-cards:hover{
+    transform: scale(1.1);
+}
+
+blockquote {
+    border-left: 10px solid #ccc;
+    margin: 1.5em 10px;
+    padding: 0.5em 10px;
+    quotes: "\201C""\201D""\2018""\2019";
+  }
+  blockquote:before {
+    color: #ccc;
+    content: open-quote;
+    font-size: 4em;
+    line-height: 0.1em;
+    margin-right: 0.25em;
+    vertical-align: -0.4em;
+  }
+  blockquote p {
+    display: inline;
+  }

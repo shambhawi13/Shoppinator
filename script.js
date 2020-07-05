@@ -2,7 +2,6 @@
 //Sample image URL:
 // https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRyTqyx98Kh8VjAwJ7Ud-k1XuKiibR_SuprGbsBln-tl-uhVaNkw7FIzEPWCA&usqp=CAc
 
-
 // Please replace the API key below:
 var rapidAPIKey = '1bf62c9debmsh3edd1466134defbp184527jsn0116cb66a76e';
 var resultObject;
@@ -17,12 +16,18 @@ $('.toggle-store-online input[type="checkbox"]').click(function () {
     if ($(this).is(":checked")) {
         storeType = 'store';
         console.log("Checkbox is checked." + storeType);
+        $('.instore-online-toggle').text("You have selected to purchase in store");
+        $('.instore-online-toggle').removeClass('hide');
+        $('.instore-online-toggle').transition('jiggle');
         $(".display-map").attr("style", "display: inline-block !important");
         $(".display-div").attr("style", "display: none !important");
     }
     else if ($(this).is(":not(:checked)")) {
         storeType = 'online';
         console.log("Checkbox is unchecked." + storeType);
+        $('.instore-online-toggle').text("You have selected to purchase " + storeType);
+        $('.instore-online-toggle').removeClass('hide');
+        $('.instore-online-toggle').transition('jiggle');
         $(".display-div").attr("style", "display: inline-block !important");
         $(".display-map").attr("style", "display: none !important");
     }
@@ -171,9 +176,6 @@ $('.submit-button').on('click', (event) => {
 });
 
 function addProduct(event) {
-    //event.stopPropagation();
-    //event.preventDefault();
-
     let textForm = $('.searchTextForm');
     let fieldDiv = $('<div class="field">');
     $(textForm).prepend(fieldDiv);
@@ -275,7 +277,7 @@ function generateList(resultObject) {
     }
 }
 
-$(document).on('click', '.item', function () {
+$(document).on('click', '.item', function (event){
     var object = $(this).text();
     $('.stackable-grid').empty();
     console.log(object);
@@ -333,6 +335,8 @@ function initMap() {
                 infoWindow.open(map);
                 map.setCenter(pos);
 
+                // loader
+                $(".map-loader").addClass("active");
                 //call function to get places
                 storePlaces();
             },
@@ -351,17 +355,7 @@ function initMap() {
 //https://developers.google.com/places/web-service/search
 //https://developers.google.com/maps/documentation/javascript/markers
 function storePlaces() {
-    /*code logic here 
-    take object names
-    if furniture call with furniture tag
-    else call with electronic tag
-    search query for object locations
-    for each , on response
-    create marker for place
-    populate map marker
-    */
-
-
+    
     //find place from text
     //url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=The%20Peaks%20Hongkong&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&locationbias&key=AIzaSyASRZUnw8T0CsDlOI92HxIuyYglJRmPauQ"
     
@@ -369,7 +363,7 @@ function storePlaces() {
     //find places nearby
     radius = "radius=5000";
     type = "type=store";
-    keyword = "keyword=electronics";
+    keyword = "keyword=furniture";
     apiKey = "key=AIzaSyASRZUnw8T0CsDlOI92HxIuyYglJRmPauQ";
     placesUrl = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + lattitude + "," + longitude + "&" + radius + "&" + type + "&" + keyword + "&" + apiKey;
     // console.log(url);
@@ -377,10 +371,11 @@ function storePlaces() {
     //get data object
     $.ajax({
         url: placesUrl,
-        method: "GET"
+        method: "GET",
+        // headers: { 'origin': null }
     }).then(function (response) {
         console.log(response);
-        console.log(response.results[0].geometry.location);
+        //console.log(response.results[0].geometry.location);
 
 
         //get names and locations of places
@@ -405,7 +400,9 @@ function storePlaces() {
 
         }
 
+        $(".map-loader").removeClass("active");
     });
+
 
 }
 //END MAP LOGIC

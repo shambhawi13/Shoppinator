@@ -139,21 +139,25 @@ $('.submit-button').on('click', (event) => {
             else {
                 $.ajax(settings).done(function (response) {
                     console.log(response);
-                    localStorage.setItem('scanned-image', JSON.stringify(response.objects));
-                    resultObject = _.map(response.objects, 'name');
-                    resultObject = _.uniq(resultObject);
-                    //remove loader
-                    $('.search-loader').removeClass('active');
-                    // navigate to results page
-                    generateList(resultObject);
-                    $('.main-content').attr('style', 'display:none !important');
-                    $('.result-content').attr('style', 'display:flex !important');
-                }).then(() => {
-                    //call function that performs all task in result page
-                    //getLocation();
-                    // navigate to results page
-                    //window.location.href = "./result.html";
-                });
+                    if (response.error) {
+                        //remove loader
+                        $('.search-loader').removeClass('active');
+                        $('.ui.modal.vision-err').modal('show');
+                        $('.form-image-url textarea').html('');
+                    }
+                    else {
+                        localStorage.setItem('scanned-image', JSON.stringify(response.objects));
+                        resultObject = _.map(response.objects, 'name');
+                        resultObject = _.uniq(resultObject);
+                        //remove loader
+                        $('.search-loader').removeClass('active');
+                        // navigate to results page
+                        generateList(resultObject);
+                        $('.main-content').attr('style', 'display:none !important');
+                        $('.result-content').attr('style', 'display:flex !important');
+                    }
+
+                })
             }
 
         }

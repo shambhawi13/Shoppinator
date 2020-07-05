@@ -156,8 +156,8 @@ $('.submit-button').on('click', (event) => {
     }
     else if (accordSelected === 'text') {
         resultObject = [];
-        let productName = $('#product-name').val().trim();
-        resultObject.push(productName);
+        let productName = $('.product-name').map((_,el) => el.value).get();
+        resultObject.push(...productName);
         resultObject = _.uniq(resultObject);
         //remove loader
         $('.search-loader').removeClass('active');
@@ -169,6 +169,17 @@ $('.submit-button').on('click', (event) => {
     }
 
 });
+
+function addProduct(event){
+    //event.stopPropagation();
+    //event.preventDefault();
+    
+    let textForm = $('.searchTextForm');
+    let fieldDiv = $('<div class="field">');
+    $(textForm).prepend(fieldDiv);
+    let productInput = $('<input type="text" placeholder="Product name" class="product-name">');
+    $(fieldDiv).append(productInput);
+}
 
 
 /* Search Page Logic ends here */

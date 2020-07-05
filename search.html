@@ -85,37 +85,25 @@
                     </div>
                     <div class="content">
                         <!-- form -->
-                        <form class="ui fluid form">
-                            <div class="ui divider"></div>
+                        <label><strong>Product Name</strong></label>
+                        <div class="ui divider"></div>
+                        <div class="ui fluid form searchTextForm">
                             <div class="field">
-                                <label>Product Name</label>
-                                <input type="text" placeholder="Product name" id="product-name">
+                                <input type="text" placeholder="Product name" class="product-name">
                                 <div class="ui pointing label hide">
                                     Please enter a product name
                                 </div>
                             </div>
                             <div class="ui divider"></div>
-                            <div class="field" placeholder="Last Name">
-                                <label>Product Type</label>
-                                <select class="ui fluid search dropdown" name="type" id="product-type">
-                                    <option value="">Electronics</option>
-                                    <option value="1">Furniture</option>
-                                    <option value="2">Decoratives</option>
-                                </select>
-                                <div class="ui pointing label hide">
-                                    Please enter a product Type
-                                </div>
-                            </div>
-                            <div class="ui divider"></div>
                             <div class="inline field">
-                                <button class="ui icon primary basic button">
+                                <button class="ui icon primary basic button" onclick="addProduct()">
                                     <i class="plus circle icon"></i>
                                 </button>
                                 <div class="ui left pointing label hide">
                                     <!-- to be used later-->
                                 </div>
                             </div>
-                        </form>
+                        </div>
 
                     </div>
                 </div>

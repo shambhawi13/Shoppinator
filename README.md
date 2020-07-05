@@ -6,6 +6,8 @@ Here is screenshot of how it looks.
 ```
 
 ![shopping](/Assets/final.png)
+![searching](/assets/images/ss-search-text.png)
+![map results](/assets/images/ss-search-text-result.png)
 
 
 ## Prerequisites
@@ -43,7 +45,8 @@ git clone https://github.com/shambhawi13/Shoppinator.git
  * **Giovanni Noisy**
 
  * **Ernest Urzua**
-
+ [GitHub](https://github.com/ErnestUrzua) | 
+ [LinkedIn](https://www.linkedin.com/in/ernesturzua/)
 
 ## Review URL
 

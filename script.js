@@ -247,6 +247,7 @@ function initMap() {
 
 function amazonSearch(item) {
     // var items = item.join(",");
+    $('.results-loader').addClass('active');
     axios.get("https://amazon-product-reviews-keywords.p.rapidapi.com/product/search?country=US&keyword=" + item, {
         "headers": {
             "x-rapidapi-host": "amazon-product-reviews-keywords.p.rapidapi.com",
@@ -288,10 +289,12 @@ function amazonSearch(item) {
                 $(prodText).append(prodRating);
 
             }
+            $('.results-loader').removeClass('active');
 
         })
         .catch(error => {
             console.log(error);
+            $('.results-loader').removeClass('active');
         })
 }
 

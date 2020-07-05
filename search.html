@@ -26,7 +26,7 @@
     <main class="ui grid main-content">
         <div class="ui inverted centered inline dimmer search-loader">
             <div class="ui text loader">Loading</div>
-          </div>
+        </div>
         <div class="row no-pad-bottom">
             <div class="three wide column">
 
@@ -50,9 +50,10 @@
                                             <p>Please click on upload button to upload an image. Maximum image size
                                                 allowed is 5MB</p>
 
-                                            <input id="fileInput" type="file" style="display:none;" accept="image/png, image/jpeg" />
+                                            <input id="fileInput" type="file" style="display:none;"
+                                                accept="image/png, image/jpeg" />
                                             <button value="upload" class="ui labeled icon primary basic button upload"
-                                                onclick="uploadImage()" >
+                                                onclick="uploadImage()">
                                                 <i class="upload icon"></i> Upload
                                             </button>
                                             <div class="ui pointing label upload info hide" id="uploadedFileName"></div>
@@ -138,25 +139,28 @@
 
     <main class="ui grid result-content">
         <div class="row">
-          <div class="one wide column"></div>
-          <div class="four wide column">
-            <div id="item-buttons" class="ui divided stackable items"></div>
-          </div>
-          <div class="ten wide column display-div">
-            <div class="ui placeholder segment">
-              <div class="ui stackable four column grid stackable-grid">
-                 <div style="width: 100%;">Please Click on items on the left.</div> 
-              </div>
+            <div class="one wide column"></div>
+            <div class="four wide column">
+                <div id="item-buttons" class="ui divided stackable items"></div>
             </div>
-            <br />
-          </div>
-          <!-- map page -->
-          <div class="ten wide column display-map">
-            <div id="map"></div>
-          </div>
-          <div class="one wide column"></div>
+            <div class="ten wide column display-div">
+                <div class="ui placeholder segment">
+                    <div class="ui inverted centered inline dimmer results-loader">
+                        <div class="ui text loader">Loading</div>
+                    </div>
+                    <div class="ui stackable four column grid stackable-grid">
+                        <div style="width: 100%;">Please Click on items on the left.</div>
+                    </div>
+                </div>
+                <br />
+            </div>
+            <!-- map page -->
+            <div class="ten wide column display-map">
+                <div id="map"></div>
+            </div>
+            <div class="one wide column"></div>
         </div>
-      </main>
+    </main>
 
     <!--testing ends-->
 
@@ -166,11 +170,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="./script.js"></script>
-    <script
-      async
-      defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASRZUnw8T0CsDlOI92HxIuyYglJRmPauQ&callback=initMap"
-    ></script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASRZUnw8T0CsDlOI92HxIuyYglJRmPauQ&callback=initMap"></script>
 </body>
 
 </html>

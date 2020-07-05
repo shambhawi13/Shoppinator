@@ -143,7 +143,7 @@ $('.submit-button').on('click', (event) => {
                         //remove loader
                         $('.search-loader').removeClass('active');
                         $('.ui.modal.vision-err').modal('show');
-                        $('.form-image-url textarea').html('');
+                        $('.form-image-url textarea').val('');
                     }
                     else {
                         localStorage.setItem('scanned-image', JSON.stringify(response.objects));

@@ -27,6 +27,28 @@
         <div class="ui inverted centered inline dimmer search-loader">
             <div class="ui text loader">Loading</div>
         </div>
+        <!-- modal -->
+        <div class="ui basic modal vision-err">
+            <div class="ui icon header">
+              <i class="exclamation triangle icon"></i>
+              Seems like error!!
+            </div>
+            <div class="content modal-content">
+              <p>Image quality does not seem right. Try a different image.</p>
+            </div>
+            <div class="actions">
+              <div class="ui red basic cancel inverted button">
+                <i class="remove icon"></i>
+                No
+              </div>
+              <div class="ui green ok inverted button">
+                <i class="checkmark icon"></i>
+                Yes
+              </div>
+            </div>
+          </div>
+          <!-- modal ends-->
+
         <div class="row no-pad-bottom">
             <div class="three wide column">
 
@@ -44,8 +66,8 @@
 
                         <!-- virtical divider-->
                         <div class="ui placeholder segment">
-                            <div class="ui two column very relaxed stackable grid">
-                                <div class="column">
+                            <div class="ui very relaxed stackable grid">
+                                <!-- <div class="column">
                                     <div class="ui form">
                                         <div class="field">
                                             <p>Please click on upload button to upload an image. Maximum image size
@@ -60,13 +82,13 @@
                                             <div class="ui pointing label upload info hide" id="uploadedFileName"></div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <!-- horizontal divider -->
-                                <div class="ui center aligned basic segment column horizontal-div">
+                                <!-- <div class="ui center aligned basic segment column horizontal-div">
                                     <div class="ui horizontal divider">Or</div>
-                                </div>
+                                </div> -->
 
-                                <div class="middle aligned column image-url-section">
+                                <div class="column image-url-section">
                                     <div class="ui form form-image-url">
                                         <div class="field">
                                             <label>Provide Image URL</label>
@@ -75,9 +97,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="ui vertical divider">
+                            <!-- <div class="ui vertical divider">
                                 Or
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <div class="title" id="textAccord">

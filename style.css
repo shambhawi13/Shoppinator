@@ -171,3 +171,7 @@ blockquote {
   blockquote p {
     display: inline;
   }
+
+  .modal-content{
+    text-align: center;
+  }

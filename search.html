@@ -24,6 +24,9 @@
     </header>
 
     <main class="ui grid main-content">
+        <div class="ui inverted centered inline dimmer search-loader">
+            <div class="ui text loader">Loading</div>
+        </div>
         <div class="row no-pad-bottom">
             <div class="three wide column">
 
@@ -47,9 +50,10 @@
                                             <p>Please click on upload button to upload an image. Maximum image size
                                                 allowed is 5MB</p>
 
-                                            <input id="fileInput" type="file" style="display:none;" accept="image/png, image/jpeg" />
+                                            <input id="fileInput" type="file" style="display:none;"
+                                                accept="image/png, image/jpeg" />
                                             <button value="upload" class="ui labeled icon primary basic button upload"
-                                                onclick="uploadImage()" >
+                                                onclick="uploadImage()">
                                                 <i class="upload icon"></i> Upload
                                             </button>
                                             <div class="ui pointing label upload info hide" id="uploadedFileName"></div>
@@ -64,8 +68,8 @@
                                 <div class="middle aligned column image-url-section">
                                     <div class="ui form form-image-url">
                                         <div class="field">
-                                            <p>Provide Image URL</p>
-                                            <input type="text" placeholder="Image URL">
+                                            <label>Provide Image URL</label>
+                                            <textarea placeholder="Image URL"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -81,37 +85,25 @@
                     </div>
                     <div class="content">
                         <!-- form -->
-                        <form class="ui fluid form">
-                            <div class="ui divider"></div>
+                        <label><strong>Product Name</strong></label>
+                        <div class="ui divider"></div>
+                        <div class="ui fluid form searchTextForm">
                             <div class="field">
-                                <label>Product Name</label>
-                                <input type="text" placeholder="Product name" id="product-name">
+                                <input type="text" placeholder="Product name" class="product-name">
                                 <div class="ui pointing label hide">
                                     Please enter a product name
                                 </div>
                             </div>
                             <div class="ui divider"></div>
-                            <div class="field" placeholder="Last Name">
-                                <label>Product Type</label>
-                                <select class="ui fluid search dropdown" name="type" id="product-type">
-                                    <option value="">Electronics</option>
-                                    <option value="1">Furniture</option>
-                                    <option value="2">Decoratives</option>
-                                </select>
-                                <div class="ui pointing label hide">
-                                    Please enter a product Type
-                                </div>
-                            </div>
-                            <div class="ui divider"></div>
                             <div class="inline field">
-                                <button class="ui icon primary basic button">
+                                <button class="ui icon primary basic button" onclick="addProduct()">
                                     <i class="plus circle icon"></i>
                                 </button>
                                 <div class="ui left pointing label hide">
                                     <!-- to be used later-->
                                 </div>
                             </div>
-                        </form>
+                        </div>
 
                     </div>
                 </div>
@@ -131,12 +123,42 @@
         </div>
     </main>
 
+    <!-- testing results page injected-->
+
+    <main class="ui grid result-content">
+        <div class="row">
+            <div class="one wide column"></div>
+            <div class="four wide column">
+                <div id="item-buttons" class="ui divided stackable items"></div>
+            </div>
+            <div class="ten wide column display-div">
+                <div class="ui placeholder segment">
+                    <div class="ui inverted centered inline dimmer results-loader">
+                        <div class="ui text loader">Loading</div>
+                    </div>
+                    <div class="ui stackable four column grid stackable-grid">
+                        <div style="width: 100%;">Please Click on items on the left.</div>
+                    </div>
+                </div>
+                <br />
+            </div>
+            <!-- map page -->
+            <div class="ten wide column display-map">
+                <div id="map"></div>
+            </div>
+            <div class="one wide column"></div>
+        </div>
+    </main>
+
+    <!--testing ends-->
+
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="./script.js"></script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASRZUnw8T0CsDlOI92HxIuyYglJRmPauQ&callback=initMap"></script>
 </body>
 
 </html>

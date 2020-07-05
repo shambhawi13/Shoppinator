@@ -391,8 +391,6 @@ function storePlaces(keyword) {
     }).then(function (response) {
         console.log(response);
         //console.log(response.results[0].geometry.location);
-
-
         //get names and locations of places
         for (var i = 0; i < response.results.length; i++) {
             //get locations from data
@@ -416,6 +414,14 @@ function storePlaces(keyword) {
         }
 
         $(".map-loader").removeClass("active");
+    }).fail(function (error) {
+        $('.map-modal')
+            .modal({
+                centered: false
+            })
+            .modal('show')
+            ;
+        // error handling
     });
 
 

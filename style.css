@@ -175,3 +175,7 @@ blockquote {
   .modal-content{
     text-align: center;
   }
+
+  .procuct-modal{
+      display: none;
+  }

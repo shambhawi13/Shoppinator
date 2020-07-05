@@ -263,6 +263,9 @@ function amazonSearch(item) {
         })
         .catch(error => {
             console.log(error);
+            if (error.response) {
+                $('product-modal').removeClass('none');
+            }
             $('.results-loader').removeClass('active');
         })
 }

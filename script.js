@@ -2,7 +2,6 @@
 //Sample image URL:
 // https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRyTqyx98Kh8VjAwJ7Ud-k1XuKiibR_SuprGbsBln-tl-uhVaNkw7FIzEPWCA&usqp=CAc
 
-
 // Please replace the API key below:
 var rapidAPIKey = '1bf62c9debmsh3edd1466134defbp184527jsn0116cb66a76e';
 var resultObject;
@@ -17,12 +16,18 @@ $('.toggle-store-online input[type="checkbox"]').click(function () {
     if ($(this).is(":checked")) {
         storeType = 'store';
         console.log("Checkbox is checked." + storeType);
+        $('.instore-online-toggle').text("You have selected to purchase in store");
+        $('.instore-online-toggle').removeClass('hide');
+        $('.instore-online-toggle').transition('jiggle');
         $(".display-map").attr("style", "display: inline-block !important");
         $(".display-div").attr("style", "display: none !important");
     }
     else if ($(this).is(":not(:checked)")) {
         storeType = 'online';
         console.log("Checkbox is unchecked." + storeType);
+        $('.instore-online-toggle').text("You have selected to purchase " + storeType);
+        $('.instore-online-toggle').removeClass('hide');
+        $('.instore-online-toggle').transition('jiggle');
         $(".display-div").attr("style", "display: inline-block !important");
         $(".display-map").attr("style", "display: none !important");
     }
@@ -92,8 +97,8 @@ $('.submit-button').on('click', (event) => {
                 // navigate to results page
                 //window.location.href = "./result.html";
                 generateList(resultObject);
-                $('.main-content').attr('style','display:none !important');
-                $('.result-content').attr('style','display:flex !important');
+                $('.main-content').attr('style', 'display:none !important');
+                $('.result-content').attr('style', 'display:flex !important');
             });
         }
         else {
@@ -156,7 +161,7 @@ $('.submit-button').on('click', (event) => {
     }
     else if (accordSelected === 'text') {
         resultObject = [];
-        let productName = $('.product-name').map((_,el) => el.value).get();
+        let productName = $('.product-name').map((_, el) => el.value).get();
         resultObject.push(...productName);
         resultObject = _.uniq(resultObject);
         //remove loader
@@ -170,10 +175,7 @@ $('.submit-button').on('click', (event) => {
 
 });
 
-function addProduct(event){
-    //event.stopPropagation();
-    //event.preventDefault();
-    
+function addProduct(event) {
     let textForm = $('.searchTextForm');
     let fieldDiv = $('<div class="field">');
     $(textForm).prepend(fieldDiv);
@@ -321,7 +323,7 @@ function generateList(resultObject) {
     }
 }
 
-$(document).on('click', '.item', function () {
+$(document).on('click', '.item', function (event){
     var object = $(this).text();
     $('.stackable-grid').empty();
     console.log(object);

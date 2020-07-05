@@ -1,40 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css">
     <title>Shoppinator</title>
 </head>
-<header>
-    <div class="ui borderless fluid huge menu">
-        <div class="item">
-            <img class="ui medium image" src="./assets/images/shop_logo1.png">
-        </div>
 
-        <!-- <a class="item">Contact</a> -->
+<body>
+    <header>
+        <div class="ui grid borderless fluid huge menu">
+            <div class="item nine wide column">
+                <img class="ui medium image" src="./assets/images/shop_logo1.png">
+            </div>
 
-        <div class="right pointing menu">
-            <a href="index.html" class="active item">About</a>
-            <a href="search.html" class="active item">Search</a>
-        </div>
-</header>
-<body id="landingPage">
+            <div class="right pointing menu nav-bar-menu seven wide column">
+                <a class="active item" href="./index.html">About</a>
+                <a class="item" href="./search.html">Search</a>
+            </div>
+    </header>
     <!-- center div and text -->
-    <div id = "aboutUs" class="ui container left aligned segment">
+    <main id="landingPage" class="ui grid">
+        <div class="row no-pad-bottom">
+            <div class="seven wide column"></div>
+            <div class="eight wide column">
+                <div id="aboutUs" class="ui container left aligned">
 
-        <h1 class="ui huge header">About Us</h1>
-        <p>Shoppinator was built for consumers, by consumers! Ever see something and wanted to buy it, but didn't
-            know where to get it? Shoppinator has made this process easy by uploading a photo and with intelligent AI
-            can detect what the item is, and then can list stores online or nearby all in a simple intuitive layout. 
-        </p>
+                    <h1 class="ui huge header">About Us</h1>
+                    <p>Transforming shopping into an experience. Choose between online and local stores just by one click and experience shopping with AI.</p>
+                    <p>Shoppinator was built for consumers, by consumers! Ever see something and wanted to buy it, but
+                        didn't
+                        know where to get it? Shoppinator has made this process easy by uploading a photo and with
+                        intelligent AI
+                        can detect what the item is, and then can list stores online or nearby all in a simple intuitive
+                        layout.
+                    </p>
+                    <blockquote
+                        cite="https://www.business.com/articles/retail-or-e-tail-buying-online-vs-buying-in-person/">
+                        Though e-commerce is growing faster than any other retail sector, the opportunity for
+                        brick-and-mortar
+                        retailers isn’t extinct; it’s simply a different value proposition in the eyes of the customer
+                    </blockquote>
 
-      </div>
+                </div>
+            </div>
+            <div class="one wide column"></div>
+        </div>
+
+    </main>
+
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="./script.js"></script>
 </body>
+
 </html>

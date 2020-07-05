@@ -11,9 +11,7 @@ var storeType = 'online';
 var accordSelected = 'image';
 var b64;
 
-// $('.ui.accordion')
-//     .accordion()
-//     ;
+$('.ui.accordion').accordion();
 
 $('.toggle-store-online input[type="checkbox"]').click(function () {
     if ($(this).is(":checked")) {

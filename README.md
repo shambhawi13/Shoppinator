@@ -41,6 +41,8 @@ git clone https://github.com/shambhawi13/Shoppinator.git
  [LinkedIn](https://www.linkedin.com/in/shambhawi-kumari/)
 
  * **Giovanni Noisy**
+ [Link to Github](https://github.com/GNoisy) | 
+ [Link to LinkedIn](https://www.linkedin.com/in/giovanni-noisy-04098989/)
 
  * **Ernest Urzua**
  [GitHub](https://github.com/ErnestUrzua) | 

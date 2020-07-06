@@ -4,7 +4,7 @@
 ```
 Here is screenshot of how it looks.
 ```
-![image search](/assets/images/shoppinator-search-image.gif)
+![image search](/assets/images/Shoppinator-search-image.gif)
 ![text search](/assets/images/shoppinator-search-text.gif)
 
 
@@ -41,6 +41,8 @@ git clone https://github.com/shambhawi13/Shoppinator.git
  [LinkedIn](https://www.linkedin.com/in/shambhawi-kumari/)
 
  * **Giovanni Noisy**
+ [Link to Github](https://github.com/GNoisy) | 
+ [Link to LinkedIn](https://www.linkedin.com/in/giovanni-noisy-04098989/)
 
  * **Ernest Urzua**
  [GitHub](https://github.com/ErnestUrzua) | 

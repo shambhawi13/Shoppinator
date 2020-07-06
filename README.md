@@ -1,12 +1,25 @@
 # Shoppinator
+- Shoppinator simplifies the search experience and creates a one-stop location for everything.
+- Instead of searching each item and tracking on personal notes, Shoppinator creates a platform to help users to just give the link to the image of his choice. eg: a workplace/livingspace and we will take care of processing the image and suggesting users of different items that he would like to buy.
+- Users need not track and search items one by one.
+- It provides detail on both online purchase as well as nearby stores based on the user's choice.
+- If a user wants in store purchase,Shoppinator provides a list of stores based on the user's location.  
 
 
 ```
-Here is screenshot of how it looks.
+Here is screenshot of how it works if you search by Image
 ```
 ![image search](/assets/images/Shoppinator-search-image.gif)
+
+```
+If you search by text:
+```
 ![text search](/assets/images/shoppinator-search-text.gif)
 
+```
+Error handling and validations are also taken care of. Example if the user provides invalid
+```
+![error](/assets/images/warning.png)
 
 ## Prerequisites
 

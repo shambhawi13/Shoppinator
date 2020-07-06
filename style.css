@@ -13,6 +13,12 @@
     height: 100%;
 }
 
+.about-content{
+    height: 100%;
+    position: absolute;
+    overflow: scroll;
+}
+
 .no-pad-bottom{
     padding-bottom: 0px !important;
 }

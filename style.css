@@ -2,14 +2,14 @@
 /* this affects the about page only */
 #landingPage{
     background-image: url(https://i.ytimg.com/vi/brD2aR7Dr0s/maxresdefault.jpg);
-    background-size: 100%;
+    background-size: cover;
 }
 
 .main-content, main{
     font-family: 'Noto Sans JP', sans-serif;
     padding-top: 5rem !important;
     background-image: url('https://img.freepik.com/free-photo/shopping-cart-chalkboard_165073-68.jpg?size=626&ext=jpg');
-    background-size: 100%;
+    background-size: cover;
     height: 100%;
 }
 
@@ -93,6 +93,9 @@ textarea{
     }
     .display-div{
         width: 100% !important;
+    }
+    .empty-div{
+        display: none !important;
     }
     
 }
